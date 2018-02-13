@@ -9,8 +9,18 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController {
+class DetailTableViewController: UITableViewController {
     
+    var loadedNode:Node?{
+        didSet{
+            updateUI()
+        }
+    }
+    
+    func updateUI()
+    {
+        textWhat.text = loadedNode?.what
+    }
     @IBAction func barSave(_ sender: UIBarButtonItem) {
         doSave()
     }
@@ -37,10 +47,15 @@ class ViewController: UIViewController {
         textWhat.resignFirstResponder()
         
         container?.performBackgroundTask({ (context) in
+            
+            if self.loadedNode == nil{
             let node = Node(context: context)
             node.what = what
             node.cost = cost as? NSDecimalNumber
             node.created = created
+            }else{
+                self.loadedNode?.what = what
+            }
             
             try?context.save()
             DispatchQueue.main.async {

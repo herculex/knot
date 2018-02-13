@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3AA1CCB42032D45A00EF5758 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1CCB32032D45A00EF5758 /* AppDelegate.swift */; };
-		3AA1CCB62032D45A00EF5758 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1CCB52032D45A00EF5758 /* ViewController.swift */; };
+		3AA1CCB62032D45A00EF5758 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1CCB52032D45A00EF5758 /* DetailTableViewController.swift */; };
 		3AA1CCB92032D45A00EF5758 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AA1CCB72032D45A00EF5758 /* Main.storyboard */; };
 		3AA1CCBC2032D45A00EF5758 /* Knot.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1CCBA2032D45A00EF5758 /* Knot.xcdatamodeld */; };
 		3AA1CCBE2032D45A00EF5758 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AA1CCBD2032D45A00EF5758 /* Assets.xcassets */; };
@@ -22,7 +22,7 @@
 /* Begin PBXFileReference section */
 		3AA1CCB02032D45A00EF5758 /* Knot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Knot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AA1CCB32032D45A00EF5758 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3AA1CCB52032D45A00EF5758 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3AA1CCB52032D45A00EF5758 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		3AA1CCB82032D45A00EF5758 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3AA1CCBB2032D45A00EF5758 /* Knot.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Knot.xcdatamodel; sourceTree = "<group>"; };
 		3AA1CCBD2032D45A00EF5758 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 				3AA1CCDB2032D63600EF5758 /* Node.swift */,
 				3AA1CCD82032D63600EF5758 /* NodeTableViewController.swift */,
 				3AA1CCD92032D63600EF5758 /* SubNodeViewController.swift */,
-				3AA1CCB52032D45A00EF5758 /* ViewController.swift */,
+				3AA1CCB52032D45A00EF5758 /* DetailTableViewController.swift */,
 			);
 			path = Knot;
 			sourceTree = "<group>";
@@ -153,7 +153,7 @@
 			files = (
 				3AA1CCBC2032D45A00EF5758 /* Knot.xcdatamodeld in Sources */,
 				3AA1CCDC2032D63600EF5758 /* NodeTableViewController.swift in Sources */,
-				3AA1CCB62032D45A00EF5758 /* ViewController.swift in Sources */,
+				3AA1CCB62032D45A00EF5758 /* DetailTableViewController.swift in Sources */,
 				3AA1CCB42032D45A00EF5758 /* AppDelegate.swift in Sources */,
 				3AA1CCDD2032D63600EF5758 /* SubNodeViewController.swift in Sources */,
 				3AA1CCDE2032D63600EF5758 /* Extension+NodeTableViewController.swift in Sources */,
