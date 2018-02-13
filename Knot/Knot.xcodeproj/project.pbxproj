@@ -13,6 +13,10 @@
 		3AA1CCBC2032D45A00EF5758 /* Knot.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1CCBA2032D45A00EF5758 /* Knot.xcdatamodeld */; };
 		3AA1CCBE2032D45A00EF5758 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AA1CCBD2032D45A00EF5758 /* Assets.xcassets */; };
 		3AA1CCC12032D45A00EF5758 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AA1CCBF2032D45A00EF5758 /* LaunchScreen.storyboard */; };
+		3AA1CCDC2032D63600EF5758 /* NodeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1CCD82032D63600EF5758 /* NodeTableViewController.swift */; };
+		3AA1CCDD2032D63600EF5758 /* SubNodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1CCD92032D63600EF5758 /* SubNodeViewController.swift */; };
+		3AA1CCDE2032D63600EF5758 /* Extension+NodeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1CCDA2032D63600EF5758 /* Extension+NodeTableViewController.swift */; };
+		3AA1CCDF2032D63600EF5758 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1CCDB2032D63600EF5758 /* Node.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		3AA1CCBD2032D45A00EF5758 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3AA1CCC02032D45A00EF5758 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3AA1CCC22032D45A00EF5758 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3AA1CCD82032D63600EF5758 /* NodeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NodeTableViewController.swift; path = ../../../../../Desktop/Knot_findback/NodeTableViewController.swift; sourceTree = "<group>"; };
+		3AA1CCD92032D63600EF5758 /* SubNodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubNodeViewController.swift; path = ../../../../../Desktop/Knot_findback/SubNodeViewController.swift; sourceTree = "<group>"; };
+		3AA1CCDA2032D63600EF5758 /* Extension+NodeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Extension+NodeTableViewController.swift"; path = "../../../../../Desktop/Knot_findback/Extension+NodeTableViewController.swift"; sourceTree = "<group>"; };
+		3AA1CCDB2032D63600EF5758 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Node.swift; path = ../../../../../Desktop/Knot_findback/Node.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,12 +65,16 @@
 			isa = PBXGroup;
 			children = (
 				3AA1CCB32032D45A00EF5758 /* AppDelegate.swift */,
-				3AA1CCB52032D45A00EF5758 /* ViewController.swift */,
-				3AA1CCB72032D45A00EF5758 /* Main.storyboard */,
 				3AA1CCBD2032D45A00EF5758 /* Assets.xcassets */,
-				3AA1CCBF2032D45A00EF5758 /* LaunchScreen.storyboard */,
+				3AA1CCDA2032D63600EF5758 /* Extension+NodeTableViewController.swift */,
 				3AA1CCC22032D45A00EF5758 /* Info.plist */,
 				3AA1CCBA2032D45A00EF5758 /* Knot.xcdatamodeld */,
+				3AA1CCBF2032D45A00EF5758 /* LaunchScreen.storyboard */,
+				3AA1CCB72032D45A00EF5758 /* Main.storyboard */,
+				3AA1CCDB2032D63600EF5758 /* Node.swift */,
+				3AA1CCD82032D63600EF5758 /* NodeTableViewController.swift */,
+				3AA1CCD92032D63600EF5758 /* SubNodeViewController.swift */,
+				3AA1CCB52032D45A00EF5758 /* ViewController.swift */,
 			);
 			path = Knot;
 			sourceTree = "<group>";
@@ -140,8 +152,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AA1CCBC2032D45A00EF5758 /* Knot.xcdatamodeld in Sources */,
+				3AA1CCDC2032D63600EF5758 /* NodeTableViewController.swift in Sources */,
 				3AA1CCB62032D45A00EF5758 /* ViewController.swift in Sources */,
 				3AA1CCB42032D45A00EF5758 /* AppDelegate.swift in Sources */,
+				3AA1CCDD2032D63600EF5758 /* SubNodeViewController.swift in Sources */,
+				3AA1CCDE2032D63600EF5758 /* Extension+NodeTableViewController.swift in Sources */,
+				3AA1CCDF2032D63600EF5758 /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
