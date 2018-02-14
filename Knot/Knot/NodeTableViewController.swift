@@ -182,6 +182,16 @@ class NodeTableViewController: UITableViewController {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
         print("\(String(describing: segue.identifier))")
+        if(segue.identifier! == "segueDetail"){
+            if let selectedRow = tableView.indexPathForSelectedRow{
+                print("row at:\(selectedRow)")
+                if let selectedNode = fetchedResultsController?.object(at: selectedRow){
+                    print("found node at:\(selectedRow)")
+                    let detailView = segue.destination as! DetailTableViewController
+                    detailView.loadedNode = selectedNode
+                }
+            }
+        }
      }
 
     
