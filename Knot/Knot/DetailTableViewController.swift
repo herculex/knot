@@ -11,16 +11,9 @@ import CoreData
 
 class DetailTableViewController: UITableViewController {
     
-    var loadedNode:Node?{
-        didSet{
-            updateUI()
-        }
-    }
-    
-    func updateUI()
-    {
-        textWhat.text = loadedNode?.what
-    }
+    var loadedNode:Node?
+
+
     @IBAction func barSave(_ sender: UIBarButtonItem) {
         doSave()
     }
@@ -31,6 +24,7 @@ class DetailTableViewController: UITableViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         self.navigationItem.title = "New/Editing"
+        textWhat.text = loadedNode?.what ?? ""
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,15 +43,17 @@ class DetailTableViewController: UITableViewController {
         container?.performBackgroundTask({ (context) in
             
             if self.loadedNode == nil{
-            let node = Node(context: context)
-            node.what = what
-            node.cost = cost as? NSDecimalNumber
-            node.created = created
+                let node = Node(context: context)
+                node.what = what
+                node.cost = cost as? NSDecimalNumber
+                node.created = created
+                try?context.save()
             }else{
                 self.loadedNode?.what = what
+                try? self.loadedNode?.managedObjectContext?.save()
             }
             
-            try?context.save()
+            
             DispatchQueue.main.async {
                 self.navigationController?.popViewController(animated: true)
             }
