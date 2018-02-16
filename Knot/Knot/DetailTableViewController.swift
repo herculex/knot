@@ -13,7 +13,9 @@ class DetailTableViewController: UITableViewController {
     
     var loadedNode:Node?
 
-
+    @IBOutlet weak var isDoneSwitch: UISwitch!
+    @IBOutlet weak var onTopSwitch: UISwitch!
+    
     @IBAction func barSave(_ sender: UIBarButtonItem) {
         doSave()
     }
@@ -24,7 +26,15 @@ class DetailTableViewController: UITableViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         self.navigationItem.title = "New/Editing"
+        updateUI()
+    }
+    
+    func updateUI() -> () {
         textWhat.text = loadedNode?.what ?? ""
+        isDoneSwitch.isOn = loadedNode?.isDone ?? false
+        onTopSwitch.isOn = loadedNode?.onTop ?? false
+        
+        tableView.sectionHeaderHeight = 50
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,6 +48,8 @@ class DetailTableViewController: UITableViewController {
         let what = textWhat.text
         let cost = 0
         let created = Date()
+        let isDone = isDoneSwitch.isOn
+        let onTop = onTopSwitch.isOn
         textWhat.resignFirstResponder()
         
         container?.performBackgroundTask({ (context) in
@@ -47,9 +59,13 @@ class DetailTableViewController: UITableViewController {
                 node.what = what
                 node.cost = cost as? NSDecimalNumber
                 node.created = created
+                node.isDone = isDone
+                node.onTop = onTop
                 try?context.save()
             }else{
                 self.loadedNode?.what = what
+                self.loadedNode?.isDone = isDone
+                self.loadedNode?.onTop = onTop
                 try? self.loadedNode?.managedObjectContext?.save()
             }
             

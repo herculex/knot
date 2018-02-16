@@ -118,7 +118,7 @@ class NodeTableViewController: UITableViewController {
         if let node = fetchedResultsController?.object(at: indexPath){
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.text = node.what
-            cell.detailTextLabel?.text = "\(node.isDone),\(String(describing: node.created)),\(String(describing: node.children?.allObjects.count ?? 0)) child(ren)"
+            cell.detailTextLabel?.text = "\(String(describing: node.created!)),\(node.isDone)"
         }
         
         return cell
@@ -183,7 +183,7 @@ class NodeTableViewController: UITableViewController {
      // Pass the selected object to the new view controller.
         print("\(String(describing: segue.identifier))")
         if(segue.identifier! == "segueDetail"){
-            if let selectedRow = tableView.indexPathForSelectedRow{
+            if let selectedRow = tableView.indexPath(for: sender as! UITableViewCell){
                 print("row at:\(selectedRow)")
                 if let selectedNode = fetchedResultsController?.object(at: selectedRow){
                     print("found node at:\(selectedRow)")
