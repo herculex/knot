@@ -72,6 +72,18 @@ class NodeTableViewController: UITableViewController {
         super.viewDidLoad()
         updateUI()
         
+//        let todoItem1 = ToDoItem(title: "read news", completed: false, createdAt: Date(), itemIdentifier: UUID())
+//        todoItem1.saveItem()
+//        let todoItem2 = ToDoItem(title: "let's test the todo item", completed: false, createdAt: Date(), itemIdentifier: UUID())
+//        todoItem2.saveItem()
+        
+        let todoitems = DataManager.loadAll(ToDoItem.self)
+        print(todoitems)
+//        if let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first{
+//            print(url.path)
+//        }else{
+//            fatalError("Unable to access document directory")
+//        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         

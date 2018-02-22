@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CA1DE72203C11FE004075AF /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DE71203C11FE004075AF /* ToDoItem.swift */; };
+		2CA1DE74203C130C004075AF /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DE73203C130C004075AF /* DataManager.swift */; };
 		3AA1CCB42032D45A00EF5758 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1CCB32032D45A00EF5758 /* AppDelegate.swift */; };
 		3AA1CCB62032D45A00EF5758 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1CCB52032D45A00EF5758 /* DetailTableViewController.swift */; };
 		3AA1CCB92032D45A00EF5758 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AA1CCB72032D45A00EF5758 /* Main.storyboard */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2CA1DE71203C11FE004075AF /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
+		2CA1DE73203C130C004075AF /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		3AA1CCB02032D45A00EF5758 /* Knot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Knot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AA1CCB32032D45A00EF5758 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3AA1CCB52032D45A00EF5758 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +79,8 @@
 				3AE2A3322033DC4C00993CEE /* Node.swift */,
 				3AE2A3302033DC4C00993CEE /* NodeTableViewController.swift */,
 				3AE2A3312033DC4C00993CEE /* SubNodeViewController.swift */,
+				2CA1DE71203C11FE004075AF /* ToDoItem.swift */,
+				2CA1DE73203C130C004075AF /* DataManager.swift */,
 			);
 			path = Knot;
 			sourceTree = "<group>";
@@ -157,6 +163,8 @@
 				3AA1CCB62032D45A00EF5758 /* DetailTableViewController.swift in Sources */,
 				3AA1CCB42032D45A00EF5758 /* AppDelegate.swift in Sources */,
 				3AE2A3342033DC4C00993CEE /* SubNodeViewController.swift in Sources */,
+				2CA1DE72203C11FE004075AF /* ToDoItem.swift in Sources */,
+				2CA1DE74203C130C004075AF /* DataManager.swift in Sources */,
 				3AE2A3352033DC4C00993CEE /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
