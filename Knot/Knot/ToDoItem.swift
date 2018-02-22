@@ -14,7 +14,14 @@ struct ToDoItem : Codable {
     var completed:Bool
     var createdAt:Date
     var itemIdentifier:UUID
+    var wasted:Bool?
     
+//    init(title:String,completed:Bool,createdAt:Date,itemIdentifier:UUID) {
+//        self.title = title
+//        self.completed = completed
+//        self.createdAt = createdAt
+//        self.itemIdentifier = uuid
+//    }
     func saveItem() {
         DataManager.save(self, with: itemIdentifier.uuidString)
     }

@@ -109,4 +109,24 @@ public class DataManager{
             }
         }
     }
+    
+    // Delete all files
+    
+    static func deleteAll()
+    {
+        do{
+            if let files = FileManager.default.subpaths(atPath: getDocumentDirectory().path){
+                for file in files{
+//                    print(getDocumentDirectory().path)
+//                    print(NSHomeDirectory())
+                    let url = getDocumentDirectory().appendingPathComponent(file,isDirectory: false)
+                    print(url)
+                    try FileManager.default.removeItem(at: url)
+                }
+            }
+        }
+        catch{
+            fatalError("Could not load any files")
+        }
+    }
 }

@@ -72,13 +72,23 @@ class NodeTableViewController: UITableViewController {
         super.viewDidLoad()
         updateUI()
         
-//        let todoItem1 = ToDoItem(title: "read news", completed: false, createdAt: Date(), itemIdentifier: UUID())
+//        let todoItem1 = ToDoItem(title: "read news", completed: false, createdAt: Date(), itemIdentifier: UUID(),wasted:false)
 //        todoItem1.saveItem()
-//        let todoItem2 = ToDoItem(title: "let's test the todo item", completed: false, createdAt: Date(), itemIdentifier: UUID())
+//        let todoItem2 = ToDoItem(title: "let's test the todo item", completed: false, createdAt: Date(), itemIdentifier: UUID(),wasted:false)
 //        todoItem2.saveItem()
-        
+
         let todoitems = DataManager.loadAll(ToDoItem.self)
         print(todoitems)
+//        for var item in todoitems{
+//            if let wasted = item.wasted{
+//                print(wasted)
+//            }else{
+//                item.wasted = false
+//                item.saveItem()
+//            }
+//        }
+      
+//    DataManager.deleteAll()
 //        if let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first{
 //            print(url.path)
 //        }else{
