@@ -11,6 +11,7 @@ import UIKit
 protocol TodoCellDelegate {
     func didRequestDelete(_ cell:ToDoTableViewCell)
     func didRequestComplete(_ cell:ToDoTableViewCell)
+    func didRequestShare(_ cell:ToDoTableViewCell)
 }
 
 class ToDoTableViewCell: UITableViewCell {
@@ -23,6 +24,11 @@ class ToDoTableViewCell: UITableViewCell {
         // Initialization code
     }
 
+    @IBAction func shareTodo(_ sender: UIButton) {
+        if let delegateObject = self.delegate{
+            delegateObject.didRequestShare(self)
+        }
+    }
     @IBAction func deleteTodo(_ sender: UIButton) {
         if let delegateObject = self.delegate{
             delegateObject.didRequestDelete(self)

@@ -53,6 +53,14 @@
                                                 <action selector="deleteTodo:" destination="kaT-mw-pk2" eventType="touchUpInside" id="eFe-n3-snb"/>
                                             </connections>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pNU-wq-bMY">
+                                            <rect key="frame" x="187" y="39" width="40" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <state key="normal" title="Share"/>
+                                            <connections>
+                                                <action selector="shareTodo:" destination="kaT-mw-pk2" eventType="touchUpInside" id="GdK-V5-4Q4"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
@@ -67,6 +75,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="QQr-Td-p5b">
                         <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="WFb-6i-DdQ">
+                            <connections>
+                                <action selector="showConnectivityAction:" destination="G8s-tT-1pQ" id="OXD-yL-W6q"/>
+                            </connections>
+                        </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="koC-aZ-phT">
                             <rect key="frame" x="160.66666666666666" y="7.6666666666666679" width="93" height="29.000000000000004"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -81,16 +94,7 @@
                                     <action selector="addNewTodo:" destination="G8s-tT-1pQ" id="tiH-cQ-l1k"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Add" id="RJP-5P-1BV">
-                                <connections>
-                                    <action selector="addSomeNodes:" destination="G8s-tT-1pQ" id="i3n-2X-u6h"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="edit" id="VP5-0s-h81">
-                                <connections>
-                                    <action selector="openEditingMode:" destination="G8s-tT-1pQ" id="MVR-C2-ynO"/>
-                                </connections>
-                            </barButtonItem>
+                            <barButtonItem systemItem="edit" id="VP5-0s-h81"/>
                         </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
