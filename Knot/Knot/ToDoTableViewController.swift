@@ -36,7 +36,7 @@ class ToDoTableViewController: UITableViewController,TodoCellDelegate,MCSessionD
     
     func loadData() {
         todoItems = [ToDoItem]()
-        todoItems = DataManager.loadAll(ToDoItem.self).sorted(by: {$0.createdAt < $1.createdAt})
+        todoItems = DataManager.loadAll(ToDoItem.self).sorted(by: {$0.createdAt > $1.createdAt})
     }
     
     func setupConnectivity(){
