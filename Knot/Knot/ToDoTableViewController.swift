@@ -122,7 +122,7 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         }
         var delayCount = 0
         for cell in cells{
-            UIView.animate(withDuration: 1.7, delay: Double(delayCount) * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: 1.5, delay: Double(delayCount) * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
                 cell.transform = CGAffineTransform.identity
             }, completion: nil)
             delayCount += 1;
@@ -146,7 +146,9 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         
         let todoItem = todoItems[indexPath.row]
         cell.todoLabel.text = todoItem.title
-
+//        cell.layer.cornerRadius = cell.frame.size.height / 4
+//        cell.layer.cornerRadius = cell.bounds.height / 4
+        
         if todoItem.completed{
             cell.todoLabel.attributedText = strikeThroughText(todoItem.title)
         }
