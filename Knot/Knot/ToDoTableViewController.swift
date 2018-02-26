@@ -28,6 +28,7 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
     var todoItems:[ToDoItem]!{
         didSet{
             progressBar.setProgress(progress, animated: true)
+            print("todoItems did set values \(todoItems.count)")
         }
     }
     
@@ -89,10 +90,14 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
             let newTodo = ToDoItem(title: title, completed: false, createdAt: Date(), itemIdentifier: UUID(), wasted: false)
             newTodo.saveItem()
             
-            self.todoItems.append(newTodo)
+//            self.todoItems.insert(newTodo)
+            self.todoItems.insert(newTodo, at: 0)
             
-            let indexPath = IndexPath(row: self.tableView.numberOfRows(inSection: 0), section: 0)
+            self.tableView.beginUpdates()
+//            let indexPath = IndexPath(row: self.tableView.numberOfRows(inSection: 0), section: 0)
+            let indexPath = IndexPath(row: 0, section: 0)
             self.tableView.insertRows(at: [indexPath], with: .automatic)
+            self.tableView.endUpdates()
         }))
         
         addAlert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
