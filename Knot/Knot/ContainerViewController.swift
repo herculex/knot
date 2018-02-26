@@ -14,10 +14,20 @@ class ContainerViewController: UIViewController {
     @IBOutlet weak var connectionButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
     
+    @IBOutlet weak var addButtonTrail: NSLayoutConstraint!
     var todoTableViewController:ToDoTableViewController!
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animate(withDuration: 0.5, delay: 0.3, options: .curveEaseOut, animations: {
+            self.addButtonTrail.constant += self.view.bounds.width
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        addButtonTrail.constant -= view.bounds.width
         
         addButton.layer.cornerRadius = addButton.frame.size.width / 2
     }

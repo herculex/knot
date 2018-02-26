@@ -195,7 +195,6 @@ class NodeTableViewController: UITableViewController {
 
         }
     }
-    
     /*
      // MARK: - Navigation
           */

@@ -304,13 +304,14 @@
                             <constraint firstItem="Su5-1m-SR1" firstAttribute="trailing" secondItem="aAX-vS-1ow" secondAttribute="trailing" id="LrG-vf-fLx"/>
                             <constraint firstItem="Su5-1m-SR1" firstAttribute="bottom" secondItem="4ba-uG-oAs" secondAttribute="bottom" constant="20" id="dGx-z9-G3i"/>
                             <constraint firstItem="vut-Q1-2w1" firstAttribute="leading" secondItem="4ba-uG-oAs" secondAttribute="trailing" constant="8" id="eem-42-Eh9"/>
+                            <constraint firstItem="Su5-1m-SR1" firstAttribute="trailing" secondItem="pk1-Mh-02I" secondAttribute="trailing" constant="20" id="h2E-rf-2JI"/>
                             <constraint firstItem="4ba-uG-oAs" firstAttribute="top" secondItem="aAX-vS-1ow" secondAttribute="bottom" constant="30" id="iRR-da-Ze4"/>
-                            <constraint firstItem="Su5-1m-SR1" firstAttribute="trailing" secondItem="pk1-Mh-02I" secondAttribute="trailing" constant="20" id="sRR-ID-Do6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Su5-1m-SR1"/>
                     </view>
                     <connections>
                         <outlet property="addButton" destination="pk1-Mh-02I" id="pbo-J2-YXY"/>
+                        <outlet property="addButtonTrail" destination="h2E-rf-2JI" id="UJk-BR-mrv"/>
                         <outlet property="connectionButton" destination="vut-Q1-2w1" id="ZZH-Vn-h2t"/>
                         <outlet property="containerView" destination="aAX-vS-1ow" id="2dV-zl-1ON"/>
                     </connections>
