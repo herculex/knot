@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C2C9ADD204311760010FA6C /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C9ADC204311760010FA6C /* ContainerViewController.swift */; };
 		2CA1DE72203C11FE004075AF /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DE71203C11FE004075AF /* ToDoItem.swift */; };
 		2CA1DE74203C130C004075AF /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DE73203C130C004075AF /* DataManager.swift */; };
 		2CEBEEEC204005D200695FFA /* ToDoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEBEEEB204005D200695FFA /* ToDoTableViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C2C9ADC204311760010FA6C /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		2CA1DE71203C11FE004075AF /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		2CA1DE73203C130C004075AF /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2CEBEEEB204005D200695FFA /* ToDoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTableViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				3AA1CCB32032D45A00EF5758 /* AppDelegate.swift */,
 				2CEBEEEB204005D200695FFA /* ToDoTableViewController.swift */,
 				2CEBEEED204007A900695FFA /* ToDoTableViewCell.swift */,
+				2C2C9ADC204311760010FA6C /* ContainerViewController.swift */,
 				3AA1CCBD2032D45A00EF5758 /* Assets.xcassets */,
 				3AA1CCC22032D45A00EF5758 /* Info.plist */,
 				3AA1CCBA2032D45A00EF5758 /* Knot.xcdatamodeld */,
@@ -173,6 +176,7 @@
 				2CA1DE72203C11FE004075AF /* ToDoItem.swift in Sources */,
 				2CA1DE74203C130C004075AF /* DataManager.swift in Sources */,
 				3AE2A3352033DC4C00993CEE /* Node.swift in Sources */,
+				2C2C9ADD204311760010FA6C /* ContainerViewController.swift in Sources */,
 				2CEBEEEC204005D200695FFA /* ToDoTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

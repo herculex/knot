@@ -16,7 +16,6 @@ protocol TodoCellDelegate {
 
 class ToDoTableViewCell: UITableViewCell {
 
-    var delegate:TodoCellDelegate?
     
     @IBOutlet weak var todoLabel: UILabel!
     override func awakeFromNib() {
@@ -24,25 +23,10 @@ class ToDoTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    @IBAction func shareTodo(_ sender: UIButton) {
-        if let delegateObject = self.delegate{
-            delegateObject.didRequestShare(self)
-        }
-    }
-    @IBAction func deleteTodo(_ sender: UIButton) {
-        if let delegateObject = self.delegate{
-            delegateObject.didRequestDelete(self)
-        }
-    }
-    @IBAction func completeTodo(_ sender: UIButton) {
-        if let delegateObject = self.delegate{
-            delegateObject.didRequestComplete(self)
-        }
-    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        self.contentView.backgroundColor = UIColor.white
+ 
     }
 
 }
