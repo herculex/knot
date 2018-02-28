@@ -329,12 +329,22 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
     }
     func completeTodoItem(_ indexPath: IndexPath) {
         var todoItem = todoItems[indexPath.row]
-        todoItem.maskAsCompleted()
+        if todoItem.completed {
+            todoItem.maskAsUncomplete()
+        }else{
+            todoItem.maskAsCompleted()
+        }
         todoItems[indexPath.row] = todoItem
         
         
         if let cell = tableView.cellForRow(at: indexPath) as? ToDoTableViewCell{
-            cell.todoLabel.attributedText = strikeThroughText(todoItem.title)
+            
+            if todoItem.completed {
+                cell.todoLabel.attributedText = strikeThroughText(todoItem.title)
+            }else{
+                cell.todoLabel.attributedText = nil
+                cell.todoLabel.text = todoItem.title
+            }
             
             UIView.animate(withDuration: 0.1, animations: {
                 cell.transform = cell.transform.scaledBy(x: 1.5, y: 1.5)
@@ -343,7 +353,11 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
                 UIView.animate(withDuration: 0.3, delay: 0.3, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
                     cell.transform = CGAffineTransform.identity
                 }, completion: {(sucess) in
-                    self.moveTodoItem(at:indexPath,to:IndexPath(row: self.countOfUncomplete, section: 0))
+                    if todoItem.completed{
+                        self.moveTodoItem(at:indexPath,to:IndexPath(row: self.countOfUncomplete, section: 0))
+                    }else{
+                        self.moveTodoItem(at: indexPath, to: IndexPath(row: 0, section: 0))
+                    }
                 })
             })
         }
@@ -351,11 +365,12 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
     func moveTodoItem(at atIndex:IndexPath,to toIndex:IndexPath) {
         guard todoItems.count > 1 else { return }
         
-        tableView.beginUpdates()
+        print("at \(atIndex.row),to \(toIndex.row)")
+        let todoitem = todoItems[atIndex.row]
+        
+        todoItems.remove(at: atIndex.row)
+        todoItems.insert(todoitem, at: toIndex.row)
         
         tableView.moveRow(at: atIndex, to: toIndex)
-        todoItems.swapAt(atIndex.row, toIndex.row)
-        
-        tableView.endUpdates()
     }
 }

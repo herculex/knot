@@ -36,4 +36,12 @@ struct ToDoItem : Codable {
         
         DataManager.save(self, with: itemIdentifier.uuidString)
     }
+    
+    mutating func maskAsUncomplete(){
+        self.completed = false
+        self.completedAt = Date(timeIntervalSince1970: 1)
+        self.createdAt = Date()
+        
+        DataManager.save(self, with: itemIdentifier.uuidString)
+    }
 }
