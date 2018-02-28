@@ -312,8 +312,12 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         }
     }
     func strikeThroughText(_ text:String)->NSAttributedString{
+        
         let attrString:NSMutableAttributedString = NSMutableAttributedString(string: text)
-        attrString.addAttribute(.strikethroughStyle, value: 1, range: NSMakeRange(0, attrString.length))
+        let range = NSMakeRange(0, attrString.length)
+        attrString.addAttribute(.strikethroughStyle, value: 1.3, range: range)
+        attrString.addAttribute(.strikethroughColor, value: UIColor.gray, range: range)
+        attrString.addAttribute(.foregroundColor, value: UIColor.gray, range: range)
         
         return attrString
     }
