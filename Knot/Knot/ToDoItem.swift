@@ -14,7 +14,7 @@ struct ToDoItem : Codable {
     var completed:Bool
     var createdAt:Date
     var itemIdentifier:UUID
-    var wasted:Bool?
+    var completedAt:Date
     
 //    init(title:String,completed:Bool,createdAt:Date,itemIdentifier:UUID) {
 //        self.title = title
@@ -32,6 +32,8 @@ struct ToDoItem : Codable {
     
     mutating func maskAsCompleted(){
         self.completed = true
+        self.completedAt = Date()
+        
         DataManager.save(self, with: itemIdentifier.uuidString)
     }
 }

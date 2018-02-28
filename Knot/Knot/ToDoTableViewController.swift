@@ -14,6 +14,7 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
     var peerID:MCPeerID!
     var mcSession:MCSession!
     var mcAdvertiserAssistant:MCAdvertiserAssistant!
+    var countOfUncomplete:Int!
 
     @IBOutlet var progressBar: UIProgressView!
     var progress:Float{
@@ -55,8 +56,11 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
     }
     
     func loadData() {
+        let rawItems = DataManager.loadAll(ToDoItem.self).sorted(by: {$0.createdAt > $1.createdAt})
         todoItems = [ToDoItem]()
-        todoItems = DataManager.loadAll(ToDoItem.self).sorted(by: {$0.createdAt > $1.createdAt})
+        todoItems = rawItems.filter({!$0.completed})
+        countOfUncomplete = todoItems.count
+        todoItems.append(contentsOf: rawItems.filter({$0.completed}).sorted(by: {$0.completedAt > $1.completedAt}))
     }
     
     func setupConnectivity(){
@@ -92,7 +96,7 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         addAlert.addAction(UIAlertAction(title: "Create", style: .default, handler: { (action) in
             guard let title = addAlert.textFields?.first?.text,title.count > 0 else { return }
             
-            let newTodo = ToDoItem(title: title, completed: false, createdAt: Date(), itemIdentifier: UUID(), wasted: false)
+            let newTodo = ToDoItem(title: title, completed: false, createdAt: Date(), itemIdentifier: UUID(), completedAt: Date())
             newTodo.saveItem()
             
 //            self.todoItems.insert(newTodo)
@@ -157,6 +161,11 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
     }
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let completeAction = UITableViewRowAction(style: .normal, title: "Complete") { (action, indexPath) in
+            self.completeTodoItem(indexPath)
+        }
+        completeAction.backgroundColor = UIColor.green
         let shareAction = UITableViewRowAction(style: .normal, title: "Share") { (action
             , indexPath) in
             let todoItem = self.todoItems[indexPath.row]
@@ -171,7 +180,7 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         }
         deleteAction.backgroundColor = UIColor(named: "mainBlueColor")
         
-        return [deleteAction,shareAction]
+        return [completeAction,deleteAction,shareAction]
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         completeTodoItem(indexPath)

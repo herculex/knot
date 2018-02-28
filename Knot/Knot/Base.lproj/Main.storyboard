@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--MY LIST-->
+        <!--What's next?-->
         <scene sceneID="Pp2-xD-8ZH">
             <objects>
                 <tableViewController storyboardIdentifier="NodeTableView" id="G8s-tT-1pQ" customClass="ToDoTableViewController" customModule="Knot" customModuleProvider="target" sceneMemberID="viewController">
@@ -52,7 +52,7 @@
                             <outlet property="delegate" destination="G8s-tT-1pQ" id="J8O-V6-WlL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="MY LIST" id="QQr-Td-p5b">
+                    <navigationItem key="navigationItem" title="What's next?" id="QQr-Td-p5b">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="VP5-0s-h81"/>
                     </navigationItem>
                     <connections>
