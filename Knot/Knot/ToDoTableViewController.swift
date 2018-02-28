@@ -343,22 +343,19 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
                 UIView.animate(withDuration: 0.3, delay: 0.3, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
                     cell.transform = CGAffineTransform.identity
                 }, completion: {(sucess) in
-                    self.moveTodoItemToCompleted(atIndex:indexPath)
+                    self.moveTodoItem(at:indexPath,to:IndexPath(row: self.countOfUncomplete, section: 0))
                 })
             })
         }
     }
-    func moveTodoItemToCompleted(atIndex indexPath:IndexPath) {
-        
+    func moveTodoItem(at atIndex:IndexPath,to toIndex:IndexPath) {
         guard todoItems.count > 1 else { return }
-            
+        
         tableView.beginUpdates()
         
-        let toIndex = IndexPath(row: countOfUncomplete, section: 0)
-        tableView.moveRow(at: indexPath, to: toIndex)
-        todoItems.swapAt(indexPath.row, countOfUncomplete)
+        tableView.moveRow(at: atIndex, to: toIndex)
+        todoItems.swapAt(atIndex.row, toIndex.row)
         
         tableView.endUpdates()
     }
-
 }
