@@ -14,7 +14,14 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
     var peerID:MCPeerID!
     var mcSession:MCSession!
     var mcAdvertiserAssistant:MCAdvertiserAssistant!
-    var countOfUncomplete:Int!
+    
+    var countOfUncomplete:Int{
+        if todoItems.count > 0 {
+            return todoItems.filter({!$0.completed}).count
+        }else{
+            return 0
+        }
+    }
 
     @IBOutlet var progressBar: UIProgressView!
     var progress:Float{
@@ -59,7 +66,6 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         let rawItems = DataManager.loadAll(ToDoItem.self).sorted(by: {$0.createdAt > $1.createdAt})
         todoItems = [ToDoItem]()
         todoItems = rawItems.filter({!$0.completed})
-        countOfUncomplete = todoItems.count
         todoItems.append(contentsOf: rawItems.filter({$0.completed}).sorted(by: {$0.completedAt > $1.completedAt}))
     }
     
@@ -326,6 +332,7 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         todoItem.maskAsCompleted()
         todoItems[indexPath.row] = todoItem
         
+        
         if let cell = tableView.cellForRow(at: indexPath) as? ToDoTableViewCell{
             cell.todoLabel.attributedText = strikeThroughText(todoItem.title)
             
@@ -335,9 +342,23 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
             },completion:{ (sucess) in
                 UIView.animate(withDuration: 0.3, delay: 0.3, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
                     cell.transform = CGAffineTransform.identity
-                }, completion: nil)
+                }, completion: {(sucess) in
+                    self.moveTodoItemToCompleted(atIndex:indexPath)
+                })
             })
         }
+    }
+    func moveTodoItemToCompleted(atIndex indexPath:IndexPath) {
+        
+        guard todoItems.count > 1 else { return }
+            
+        tableView.beginUpdates()
+        
+        let toIndex = IndexPath(row: countOfUncomplete, section: 0)
+        tableView.moveRow(at: indexPath, to: toIndex)
+        todoItems.swapAt(indexPath.row, countOfUncomplete)
+        
+        tableView.endUpdates()
     }
 
 }
