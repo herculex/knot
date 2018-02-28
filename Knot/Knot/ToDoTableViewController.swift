@@ -183,7 +183,16 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         return [completeAction,deleteAction,shareAction]
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        completeTodoItem(indexPath)
+        if let cell = tableView.cellForRow(at: indexPath){
+            UIView.animate(withDuration: 0.1, animations: {
+                cell.transform = cell.transform.scaledBy(x: 1.2, y: 1.2)
+                
+            },completion:{ (sucess) in
+                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+                    cell.transform = CGAffineTransform.identity
+                }, completion: nil)
+            })
+        }
     }
     
     /*
@@ -320,7 +329,7 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
                 cell.transform = cell.transform.scaledBy(x: 1.5, y: 1.5)
                 
             },completion:{ (sucess) in
-                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+                UIView.animate(withDuration: 0.3, delay: 0.3, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
                     cell.transform = CGAffineTransform.identity
                 }, completion: nil)
             })
