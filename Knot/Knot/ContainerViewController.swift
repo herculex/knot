@@ -13,6 +13,7 @@ class ContainerViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var connectionButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var addText: UITextField!
     
     @IBOutlet weak var addButtonTrail: NSLayoutConstraint!
     var todoTableViewController:ToDoTableViewController!
@@ -22,8 +23,13 @@ class ContainerViewController: UIViewController {
     @IBOutlet var visualEffectBlur: UIVisualEffectView!
 
     @IBAction func dismissPopup(_ sender: UIButton) {
+        //
+        
+        todoTableViewController.addNewTodo(withTitle: addText.text!)
+        addText.text = nil
+        
         //animateOut
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
             self.addItemView.transform = CGAffineTransform.init(scaleX: 1.4, y: 1.4)
             self.addItemView.alpha = 0
             self.visualEffectBlur.effect = nil
@@ -46,7 +52,7 @@ class ContainerViewController: UIViewController {
         
         effectBlur = visualEffectBlur.effect
         visualEffectBlur.effect = nil
-        addItemView.layer.cornerRadius = 6
+        addItemView.layer.cornerRadius = 10
         
         addButtonTrail.constant -= view.bounds.width
         

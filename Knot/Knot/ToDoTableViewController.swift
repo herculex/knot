@@ -22,7 +22,28 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
             return 0
         }
     }
-
+    var effectActivited:Bool = false
+    @IBOutlet var visualEffect: UIVisualEffectView!
+    @IBAction func addItem(_ sender: Any) {
+        
+        if let superView = self.view.superview{
+            if effectActivited {
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.visualEffect.removeFromSuperview()
+                }, completion: { (sucess) in
+                    self.effectActivited = false
+                })
+                
+                
+            }else{
+                superView.addSubview(visualEffect)
+                visualEffect.frame = superView.frame
+                effectActivited = true
+            }
+        }
+    
+    }
+    
     @IBOutlet var progressBar: UIProgressView!
     var progress:Float{
         if todoItems.count > 0 {
@@ -90,6 +111,20 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         }))
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func addNewTodo(withTitle title:String){
+        guard title.count > 0 else { return }
+        
+        let newTodo = ToDoItem(title: title, completed: false, createdAt: Date(), itemIdentifier: UUID(), completedAt: Date())
+        newTodo.saveItem()
+        
+        self.todoItems.insert(newTodo, at: 0)
+        
+        self.tableView.beginUpdates()
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.tableView.insertRows(at: [indexPath], with: .automatic)
+        self.tableView.endUpdates()
     }
     
     func addNewTodo() {
