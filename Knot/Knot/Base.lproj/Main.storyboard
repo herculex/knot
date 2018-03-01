@@ -245,7 +245,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GLi-Ob-LOV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="724.63768115942037" y="-243.75000000000003"/>
+            <point key="canvasLocation" x="-49" y="-1283"/>
         </scene>
         <!--Container View Controller-->
         <scene sceneID="Yly-Sd-cmG">
@@ -277,12 +277,6 @@
                                     <action selector="addNewTodoItem:" destination="3ow-NZ-8Na" eventType="touchUpInside" id="EbC-B6-BKb"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aAX-vS-1ow">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="665"/>
-                                <connections>
-                                    <segue destination="c1S-9l-yNO" kind="embed" identifier="todoVC" id="hYa-0x-epc"/>
-                                </connections>
-                            </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vut-Q1-2w1">
                                 <rect key="frame" x="125" y="687" width="54" height="33"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
@@ -293,6 +287,12 @@
                                     <action selector="triggerConnection:" destination="3ow-NZ-8Na" eventType="touchUpInside" id="trn-gl-3mV"/>
                                 </connections>
                             </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aAX-vS-1ow">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="665"/>
+                                <connections>
+                                    <segue destination="c1S-9l-yNO" kind="embed" identifier="todoVC" id="hYa-0x-epc"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -312,13 +312,60 @@
                     <connections>
                         <outlet property="addButton" destination="pk1-Mh-02I" id="pbo-J2-YXY"/>
                         <outlet property="addButtonTrail" destination="h2E-rf-2JI" id="UJk-BR-mrv"/>
+                        <outlet property="addItemView" destination="eLC-oK-v5e" id="rXC-P9-QME"/>
                         <outlet property="connectionButton" destination="vut-Q1-2w1" id="ZZH-Vn-h2t"/>
                         <outlet property="containerView" destination="aAX-vS-1ow" id="2dV-zl-1ON"/>
+                        <outlet property="visualEffectBlur" destination="veD-FH-SeD" id="XAS-mT-vd9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KW7-jy-86m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" id="veD-FH-SeD">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="5iI-Nh-PDE">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TTt-9t-q2c">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="6rf-XX-kmH">
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <vibrancyEffect>
+                                    <blurEffect style="light"/>
+                                </vibrancyEffect>
+                            </visualEffectView>
+                        </subviews>
+                    </view>
+                    <blurEffect style="dark"/>
+                </visualEffectView>
+                <view contentMode="scaleToFill" id="eLC-oK-v5e">
+                    <rect key="frame" x="0.0" y="0.0" width="327" height="175"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Item" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TML-J4-uU7">
+                            <rect key="frame" x="129" y="20" width="69" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dal-9h-8so">
+                            <rect key="frame" x="145" y="125" width="37" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Done"/>
+                            <connections>
+                                <action selector="dismissPopup:" destination="3ow-NZ-8Na" eventType="touchUpInside" id="NNO-QP-XtO"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <viewLayoutGuide key="safeArea" id="wUV-DR-e2X"/>
+                </view>
             </objects>
-            <point key="canvasLocation" x="-1855.072463768116" y="-211.14130434782609"/>
+            <point key="canvasLocation" x="-1878.2608695652175" y="-214.4021739130435"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fWn-pQ-3pl">

@@ -14,7 +14,7 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
     var peerID:MCPeerID!
     var mcSession:MCSession!
     var mcAdvertiserAssistant:MCAdvertiserAssistant!
-    
+
     var countOfUncomplete:Int{
         if todoItems.count > 0 {
             return todoItems.filter({!$0.completed}).count
