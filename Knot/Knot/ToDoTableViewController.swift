@@ -8,8 +8,9 @@
 
 import UIKit
 import MultipeerConnectivity
+import UserNotifications
 
-class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowserViewControllerDelegate {
+class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowserViewControllerDelegate,UNUserNotificationCenterDelegate {
 
     var peerID:MCPeerID!
     var mcSession:MCSession!
@@ -25,6 +26,8 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
     var effectActivited:Bool = false
     @IBOutlet var visualEffect: UIVisualEffectView!
     @IBAction func addItem(_ sender: Any) {
+
+
         
         if let superView = self.view.superview{
             if effectActivited {
@@ -34,11 +37,18 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
                     self.effectActivited = false
                 })
                 
+                UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { (list) in
+                    print("pending count:\(list.count)")
+                })
+                
                 
             }else{
                 superView.addSubview(visualEffect)
                 visualEffect.frame = superView.frame
                 effectActivited = true
+                
+                scheduleNotification()
+                print("schedule a notification")
             }
         }
     
@@ -113,6 +123,12 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         self.present(actionSheet, animated: true, completion: nil)
     }
     
+    func addNewTodoOnly(withTitle title:String) {
+        guard title.count > 0 else { return }
+        
+        let newTodo = ToDoItem(title: title, completed: false, createdAt: Date(), itemIdentifier: UUID(), completedAt: Date())
+        newTodo.saveItem()
+    }
     func addNewTodo(withTitle title:String){
         guard title.count > 0 else { return }
         
@@ -231,7 +247,7 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
             },completion:{ (sucess) in
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
                     cell.transform = CGAffineTransform.identity
-                }, completion: nil)
+                }, completion:nil)
             })
         }
     }
@@ -408,4 +424,52 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         
         tableView.moveRow(at: atIndex, to: toIndex)
     }
+    func showAlert() {
+        let alert = UIAlertController(title: "from notification", message: "hello.world.catch me if you can", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    // MARK: - Notifications
+   
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("notification willPresent:\(notification.request.identifier)")
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("press.....")
+        if response.actionIdentifier == "addFruit" {
+            print("press addFruit action")
+//            addNewTodoOnly(withTitle: "press addFruit action from \(response.notification.request.identifier)")
+            showAlert()
+        }else if response.actionIdentifier == "addVegi"{
+            print("press addVegi action")
+//            addNewTodoOnly(withTitle: "press addVegi action from \(response.notification.request.identifier)")
+            showAlert()
+        }else{
+            print("press nothing at all")
+        }
+        
+        completionHandler()
+    }
+    
+    
+    func scheduleNotification(){
+        
+        UNUserNotificationCenter.current().delegate = self
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let identifier = arc4random_uniform(20000).description
+        let content = UNMutableNotificationContent()
+        content.title = "Stay doing things:\(identifier)"
+        content.body = "Just a reminder to do your homework."
+        content.sound = UNNotificationSound.default()
+        content.categoryIdentifier = "foodCategeroy"
+        
+        let request = UNNotificationRequest(identifier: identifier,   content: content, trigger: trigger)
+//        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().add(request) { (err) in
+            if let err = err{
+                print("Erro:\(err.localizedDescription)")
+            }
+        }
+    }
+    
 }

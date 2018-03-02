@@ -24,6 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        //define actions
+        let fruitAction = UNNotificationAction(identifier: "addFruit", title: "Add a peice of fruit", options: [])
+        let vegiAction = UNNotificationAction(identifier: "addVegi", title: "Add a peice of Vegi", options: [])
+        
+        //Add actions to a foodCategeroy
+        let category = UNNotificationCategory(identifier: "foodCategeroy", actions: [fruitAction,vegiAction], intentIdentifiers: [], options: [])
+        
+        //Add the foodCategeroy to Notification Framework
+        UNUserNotificationCenter.current().setNotificationCategories([category])
         
         return true
     }
