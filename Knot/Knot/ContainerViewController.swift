@@ -15,6 +15,7 @@ class ContainerViewController: UIViewController {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var addText: UITextField!
     
+    @IBOutlet weak var reminder: UIDatePicker!
     @IBOutlet weak var addButtonTrail: NSLayoutConstraint!
     var todoTableViewController:ToDoTableViewController!
     
@@ -24,8 +25,8 @@ class ContainerViewController: UIViewController {
 
     @IBAction func dismissPopup(_ sender: UIButton) {
         //
-        
-        todoTableViewController.addNewTodo(withTitle: addText.text!)
+        print("select reminder:\(reminder.date)")
+        todoTableViewController.addNewTodoAt(withTitle: addText.text!, at: reminder.date)
         addText.text = nil
         
         //animateOut

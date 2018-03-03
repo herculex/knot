@@ -343,6 +343,7 @@
                         <outlet property="addText" destination="0Ki-jI-50R" id="XGL-IH-NrF"/>
                         <outlet property="connectionButton" destination="vut-Q1-2w1" id="ZZH-Vn-h2t"/>
                         <outlet property="containerView" destination="aAX-vS-1ow" id="2dV-zl-1ON"/>
+                        <outlet property="reminder" destination="1iH-G7-YMv" id="vhL-ug-Hl7"/>
                         <outlet property="visualEffectBlur" destination="veD-FH-SeD" id="XAS-mT-vd9"/>
                     </connections>
                 </viewController>
@@ -370,18 +371,11 @@
                     <blurEffect style="prominent"/>
                 </visualEffectView>
                 <view contentMode="scaleToFill" id="eLC-oK-v5e">
-                    <rect key="frame" x="0.0" y="0.0" width="327" height="175"/>
+                    <rect key="frame" x="0.0" y="0.0" width="327" height="234"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Item" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TML-J4-uU7">
-                            <rect key="frame" x="129" y="20" width="69" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dal-9h-8so">
-                            <rect key="frame" x="145" y="125" width="37" height="30"/>
+                            <rect key="frame" x="145" y="184" width="37" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <state key="normal" title="Done"/>
                             <connections>
@@ -389,12 +383,26 @@
                             </connections>
                         </button>
                         <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="todo Item Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Ki-jI-50R">
-                            <rect key="frame" x="16" y="72" width="295" height="30"/>
+                            <rect key="frame" x="16" y="141.5" width="295" height="30"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
+                        <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="1iH-G7-YMv">
+                            <rect key="frame" x="0.0" y="49" width="327" height="93"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <date key="date" timeIntervalSinceReferenceDate="541761492.21603894">
+                                <!--2018-03-03 09:18:12 +0000-->
+                            </date>
+                        </datePicker>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Item" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TML-J4-uU7">
+                            <rect key="frame" x="129" y="11" width="69" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <viewLayoutGuide key="safeArea" id="wUV-DR-e2X"/>

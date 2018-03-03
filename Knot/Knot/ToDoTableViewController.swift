@@ -47,7 +47,6 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
                 visualEffect.frame = superView.frame
                 effectActivited = true
                 
-                scheduleNotification()
                 print("schedule a notification")
             }
         }
@@ -126,13 +125,34 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
     func addNewTodoOnly(withTitle title:String) {
         guard title.count > 0 else { return }
         
-        let newTodo = ToDoItem(title: title, completed: false, createdAt: Date(), itemIdentifier: UUID(), completedAt: Date())
+        let newTodo = ToDoItem(title: title, completed: false, createdAt: Date(), itemIdentifier: UUID(), completedAt: Date(),remindAt:Date(timeIntervalSince1970: 0), hasReminder:false)
         newTodo.saveItem()
     }
+    
+    func addNewTodoAt(withTitle title:String,at reminder:Date)
+    {
+        guard title.count > 0 else { return }
+        
+        let newTodo = ToDoItem(title: title, completed: false, createdAt: Date(), itemIdentifier: UUID(), completedAt: Date(),remindAt: reminder, hasReminder:true)
+        newTodo.saveItem()
+        
+        //
+        scheduleNotification(at: reminder)
+        //
+        
+        self.todoItems.insert(newTodo, at: 0)
+        
+        self.tableView.beginUpdates()
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.tableView.insertRows(at: [indexPath], with: .automatic)
+        self.tableView.endUpdates()
+        
+    }
+    
     func addNewTodo(withTitle title:String){
         guard title.count > 0 else { return }
         
-        let newTodo = ToDoItem(title: title, completed: false, createdAt: Date(), itemIdentifier: UUID(), completedAt: Date())
+        let newTodo = ToDoItem(title: title, completed: false, createdAt: Date(), itemIdentifier: UUID(), completedAt: Date(),remindAt:Date(timeIntervalSince1970: 0), hasReminder:false)
         newTodo.saveItem()
         
         self.todoItems.insert(newTodo, at: 0)
@@ -153,7 +173,8 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         addAlert.addAction(UIAlertAction(title: "Create", style: .default, handler: { (action) in
             guard let title = addAlert.textFields?.first?.text,title.count > 0 else { return }
             
-            let newTodo = ToDoItem(title: title, completed: false, createdAt: Date(), itemIdentifier: UUID(), completedAt: Date())
+            let newTodo = ToDoItem(title: title, completed: false, createdAt: Date(), itemIdentifier: UUID(), completedAt: Date(),remindAt:Date(timeIntervalSince1970: 0),hasReminder:false)
+            
             newTodo.saveItem()
             
 //            self.todoItems.insert(newTodo)
@@ -452,10 +473,16 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
     }
     
     
-    func scheduleNotification(){
+    func scheduleNotification(at reminder:Date){
         
         UNUserNotificationCenter.current().delegate = self
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+        let currentCalendar = Calendar.current
+        let dateMatching = currentCalendar.dateComponents([.year,.month,.day,.hour,.minute], from: reminder)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateMatching, repeats: false)
         let identifier = arc4random_uniform(20000).description
         let content = UNMutableNotificationContent()
         content.title = "Stay doing things:\(identifier)"
