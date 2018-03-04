@@ -26,23 +26,33 @@ struct ToDoItem : Codable {
 //    }
     func saveItem() {
         DataManager.save(self, with: itemIdentifier.uuidString)
+        
+        if self.hasReminder {
+            NotificationManager.schedule(identifier: itemIdentifier.uuidString, withTitle: title, at: remindAt)
+        }
     }
     func deleteItem()
     {
         DataManager.delete(itemIdentifier.uuidString)
+        
+        if self.hasReminder {
+            NotificationManager.cancel(itemIdentifier.uuidString)
+        }
     }
     mutating func cancelReminder()
     {
         self.hasReminder = false
         self.remindAt = Date(timeIntervalSince1970: 0)
-        
         DataManager.save(self, with: itemIdentifier.uuidString)
+        
+        NotificationManager.cancel(itemIdentifier.uuidString)
     }
     mutating func setupReminder(at reminder:Date){
         self.remindAt = reminder
         self.hasReminder = true
-        
         DataManager.save(self, with: itemIdentifier.uuidString)
+        
+        NotificationManager.schedule(identifier: itemIdentifier.uuidString, withTitle: title, at: remindAt)
     }
     mutating func maskAsCompleted(){
         self.completed = true
