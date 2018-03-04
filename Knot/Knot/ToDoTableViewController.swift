@@ -10,7 +10,7 @@ import UIKit
 import MultipeerConnectivity
 import UserNotifications
 
-class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowserViewControllerDelegate,UNUserNotificationCenterDelegate {
+class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowserViewControllerDelegate {
 
     var peerID:MCPeerID!
     var mcSession:MCSession!
@@ -28,7 +28,6 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
     @IBAction func addItem(_ sender: Any) {
 
 
-        
         if let superView = self.view.superview{
             if effectActivited {
                 UIView.animate(withDuration: 0.5, animations: {
@@ -38,9 +37,9 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
                 })
                 
                 UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { (list) in
-                    print("pending count:\(list.count)")
+                    print("pending count:\(String(describing: list.first?.identifier))")
+                    
                 })
-                
                 
             }else{
                 superView.addSubview(visualEffect)
@@ -445,37 +444,11 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         
         tableView.moveRow(at: atIndex, to: toIndex)
     }
-    func showAlert() {
-        let alert = UIAlertController(title: "from notification", message: "hello.world.catch me if you can", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
     // MARK: - Notifications
    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("notification willPresent:\(notification.request.identifier)")
-    }
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("press.....")
-        if response.actionIdentifier == "addFruit" {
-            print("press addFruit action")
-//            addNewTodoOnly(withTitle: "press addFruit action from \(response.notification.request.identifier)")
-            showAlert()
-        }else if response.actionIdentifier == "addVegi"{
-            print("press addVegi action")
-//            addNewTodoOnly(withTitle: "press addVegi action from \(response.notification.request.identifier)")
-            showAlert()
-        }else{
-            print("press nothing at all")
-        }
-        
-        completionHandler()
-    }
-    
-    
+
+
     func scheduleNotification(at reminder:Date){
-        
-        UNUserNotificationCenter.current().delegate = self
         
 //        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
 

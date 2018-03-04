@@ -11,7 +11,7 @@ import CoreData
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
@@ -34,7 +34,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Add the foodCategeroy to Notification Framework
         UNUserNotificationCenter.current().setNotificationCategories([category])
         
+        UNUserNotificationCenter.current().delegate = self
+        
         return true
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("notification willPresent:\(notification.request.identifier)")
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("press.....")
+        if response.actionIdentifier == "addFruit" {
+            print("press addFruit action")
+            //            addNewTodoOnly(withTitle: "press addFruit action from \(response.notification.request.identifier)")
+            //            showAlert()
+            let identifier = response.notification.request.identifier
+            let newTodo = ToDoItem(title: "from the appdelegate,\(identifier)", completed: false, createdAt: Date(), itemIdentifier: UUID(), completedAt: Date(),remindAt:Date(timeIntervalSince1970: 0), hasReminder:false)
+            newTodo.saveItem()
+            
+        }else if response.actionIdentifier == "addVegi"{
+            print("press addVegi action")
+            //            addNewTodoOnly(withTitle: "press addVegi action from \(response.notification.request.identifier)")
+        }else{
+            print("press nothing at all")
+        }
+        
+        completionHandler()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
