@@ -34,11 +34,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         //Add the foodCategeroy to Notification Framework
         UNUserNotificationCenter.current().setNotificationCategories([category])
         
+        //Add the Delegate to UserNotificationCenter
         UNUserNotificationCenter.current().delegate = self
         
         return true
     }
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
         print("notification willPresent:\(notification.request.identifier)")
     }
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {

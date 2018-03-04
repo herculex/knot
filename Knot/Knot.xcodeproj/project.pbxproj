@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C2C9ADD204311760010FA6C /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C9ADC204311760010FA6C /* ContainerViewController.swift */; };
+		2C619C45204C11A100A607DF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C619C44204C11A100A607DF /* NotificationManager.swift */; };
 		2CA1DE72203C11FE004075AF /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DE71203C11FE004075AF /* ToDoItem.swift */; };
 		2CA1DE74203C130C004075AF /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DE73203C130C004075AF /* DataManager.swift */; };
 		2CEBEEEC204005D200695FFA /* ToDoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEBEEEB204005D200695FFA /* ToDoTableViewController.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		2C2C9ADC204311760010FA6C /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		2C619C44204C11A100A607DF /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		2CA1DE71203C11FE004075AF /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		2CA1DE73203C130C004075AF /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2CEBEEEB204005D200695FFA /* ToDoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTableViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				3AE2A3312033DC4C00993CEE /* SubNodeViewController.swift */,
 				2CA1DE71203C11FE004075AF /* ToDoItem.swift */,
 				2CA1DE73203C130C004075AF /* DataManager.swift */,
+				2C619C44204C11A100A607DF /* NotificationManager.swift */,
 			);
 			path = Knot;
 			sourceTree = "<group>";
@@ -172,6 +175,7 @@
 				3AA1CCB62032D45A00EF5758 /* DetailTableViewController.swift in Sources */,
 				3AA1CCB42032D45A00EF5758 /* AppDelegate.swift in Sources */,
 				3AE2A3342033DC4C00993CEE /* SubNodeViewController.swift in Sources */,
+				2C619C45204C11A100A607DF /* NotificationManager.swift in Sources */,
 				2CEBEEEE204007A900695FFA /* ToDoTableViewCell.swift in Sources */,
 				2CA1DE72203C11FE004075AF /* ToDoItem.swift in Sources */,
 				2CA1DE74203C130C004075AF /* DataManager.swift in Sources */,

@@ -135,9 +135,9 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         let newTodo = ToDoItem(title: title, completed: false, createdAt: Date(), itemIdentifier: UUID(), completedAt: Date(),remindAt: reminder, hasReminder:true)
         newTodo.saveItem()
         
-        //
-        scheduleNotification(at: reminder)
-        //
+        NotificationManager.schedule(identifier: newTodo.itemIdentifier.uuidString,
+                                     withTitle: newTodo.title,
+                                     at: newTodo.remindAt)
         
         self.todoItems.insert(newTodo, at: 0)
         
