@@ -28,6 +28,7 @@ class ContainerViewController: UIViewController {
         print("select reminder:\(reminder.date)")
         todoTableViewController.addNewTodoAt(withTitle: addText.text!, at: reminder.date)
         addText.text = nil
+        addText.resignFirstResponder()
         
         //animateOut
         UIView.animate(withDuration: 0.2, animations: {
@@ -73,6 +74,7 @@ class ContainerViewController: UIViewController {
         //animateIn
         self.view.addSubview(visualEffectBlur)
         visualEffectBlur.frame = self.view.frame
+        
         self.view.addSubview(addItemView)
         addItemView.center = self.view.center
         addItemView.transform = addItemView.transform.scaledBy(x: 1.3, y: 1.3)
@@ -84,6 +86,8 @@ class ContainerViewController: UIViewController {
             self.visualEffectBlur.effect = self.effectBlur
         }
         //animateIn
+        
+        addText.becomeFirstResponder()
         
 //        todoTableViewController.addNewTodo()
     }

@@ -21,9 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         UNUserNotificationCenter.current().requestAuthorization(options: [.sound,.alert,.badge]) { (authorized, error) in
             if !authorized {
                 print("knot's notification can be useless , because you did not allow notifications")
+            }else{
+                UNUserNotificationCenter.current().setNotificationCategories([])
             }
         }
-        
+        let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound],categories: nil)
+        application.registerUserNotificationSettings(settings)
         //define actions
         let completeAction = UNNotificationAction(identifier: "completed", title: "已完成", options: [])
         let cancelAction = UNNotificationAction(identifier: "cancel", title: "取消", options: [])
