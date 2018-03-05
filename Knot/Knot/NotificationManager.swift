@@ -21,7 +21,7 @@ public class NotificationManager {
         content.title = "未完成"
         content.body = title
         content.sound = UNNotificationSound.default()
-        content.categoryIdentifier = "foodCategeroy"
+        content.categoryIdentifier = "todoCategeroy"
         
         let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
         

@@ -26,8 +26,10 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
     var effectActivited:Bool = false
     @IBOutlet var visualEffect: UIVisualEffectView!
     @IBAction func addItem(_ sender: Any) {
-
-
+        
+        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { (list) in
+            print("pending count:\(list.count)") })
+        
         if let superView = self.view.superview{
             if effectActivited {
                 UIView.animate(withDuration: 0.5, animations: {
@@ -35,18 +37,10 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
                 }, completion: { (sucess) in
                     self.effectActivited = false
                 })
-                
-                UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { (list) in
-                    print("pending count:\(String(describing: list.first?.identifier))")
-                    
-                })
-                
             }else{
                 superView.addSubview(visualEffect)
                 visualEffect.frame = superView.frame
                 effectActivited = true
-                
-                print("schedule a notification")
             }
         }
     
@@ -80,6 +74,9 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         setupConnectivity()
         loadData()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: .UIApplicationWillEnterForeground, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: .UIApplicationDidEnterBackground, object: nil)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -91,6 +88,13 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         super.didReceiveMemoryWarning()
     }
     
+    @objc
+    func reloadData(){
+        print("reload data and table, called from observer ")
+        
+        loadData()
+        tableView.reloadData()
+    }
     func loadData() {
         let rawItems = DataManager.loadAll(ToDoItem.self).sorted(by: {$0.createdAt > $1.createdAt})
         todoItems = [ToDoItem]()
@@ -440,32 +444,5 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         
         tableView.moveRow(at: atIndex, to: toIndex)
     }
-    // MARK: - Notifications
    
-
-
-    func scheduleNotification(at reminder:Date){
-        
-//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-
-        let currentCalendar = Calendar.current
-        let dateMatching = currentCalendar.dateComponents([.year,.month,.day,.hour,.minute], from: reminder)
-        
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateMatching, repeats: false)
-        let identifier = arc4random_uniform(20000).description
-        let content = UNMutableNotificationContent()
-        content.title = "Stay doing things:\(identifier)"
-        content.body = "Just a reminder to do your homework."
-        content.sound = UNNotificationSound.default()
-        content.categoryIdentifier = "foodCategeroy"
-        
-        let request = UNNotificationRequest(identifier: identifier,   content: content, trigger: trigger)
-//        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        UNUserNotificationCenter.current().add(request) { (err) in
-            if let err = err{
-                print("Erro:\(err.localizedDescription)")
-            }
-        }
-    }
-    
 }

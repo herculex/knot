@@ -33,6 +33,7 @@ struct ToDoItem : Codable {
     }
     func deleteItem()
     {
+        
         DataManager.delete(itemIdentifier.uuidString)
         
         if self.hasReminder {
@@ -48,22 +49,28 @@ struct ToDoItem : Codable {
         NotificationManager.cancel(itemIdentifier.uuidString)
     }
     mutating func setupReminder(at reminder:Date){
-        self.remindAt = reminder
+        
         self.hasReminder = true
+        self.remindAt = reminder
         DataManager.save(self, with: itemIdentifier.uuidString)
         
         NotificationManager.schedule(identifier: itemIdentifier.uuidString, withTitle: title, at: remindAt)
     }
     mutating func maskAsCompleted(){
+        if self.hasReminder{
+            NotificationManager.cancel(itemIdentifier.uuidString)
+        }
+        
         self.completed = true
         self.completedAt = Date()
+        self.hasReminder = false
         
         DataManager.save(self, with: itemIdentifier.uuidString)
     }
     
     mutating func maskAsUncomplete(){
         self.completed = false
-        self.completedAt = Date(timeIntervalSince1970: 1)
+        self.completedAt = Date(timeIntervalSince1970: 0)
         self.createdAt = Date()
         
         DataManager.save(self, with: itemIdentifier.uuidString)

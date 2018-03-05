@@ -25,37 +25,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         }
         
         //define actions
-        let fruitAction = UNNotificationAction(identifier: "addFruit", title: "Add a peice of fruit", options: [])
-        let vegiAction = UNNotificationAction(identifier: "addVegi", title: "Add a peice of Vegi", options: [])
+        let completeAction = UNNotificationAction(identifier: "completed", title: "已完成", options: [])
+        let cancelAction = UNNotificationAction(identifier: "cancel", title: "取消", options: [])
         
-        //Add actions to a foodCategeroy
-        let category = UNNotificationCategory(identifier: "foodCategeroy", actions: [fruitAction,vegiAction], intentIdentifiers: [], options: [])
+        //Add actions to a todoCategeroy
+        let category = UNNotificationCategory(identifier: "todoCategeroy", actions: [completeAction,cancelAction], intentIdentifiers: [], options: [])
         
-        //Add the foodCategeroy to Notification Framework
+        //Add the todoCategeroy to Notification Framework
         UNUserNotificationCenter.current().setNotificationCategories([category])
         
         //Add the Delegate to UserNotificationCenter
         UNUserNotificationCenter.current().delegate = self
         
+        //Set up a Daily Reminder of A brand new day.
+        NotificationManager.scheduleDaily()
+        
         return true
     }
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert, .sound])
+        
         print("notification willPresent:\(notification.request.identifier)")
+        //App 内显示提醒
+//        completionHandler([.alert, .sound])
+        
+        //App 内不显示提醒
+        completionHandler([])
+
     }
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("press.....")
-        if response.actionIdentifier == "addFruit" {
-            print("press addFruit action")
-            //            addNewTodoOnly(withTitle: "press addFruit action from \(response.notification.request.identifier)")
-            //            showAlert()
-            let identifier = response.notification.request.identifier
-            let newTodo = ToDoItem(title: "from the appdelegate,\(identifier)", completed: false, createdAt: Date(), itemIdentifier: UUID(), completedAt: Date(),remindAt:Date(timeIntervalSince1970: 0), hasReminder:false)
-            newTodo.saveItem()
+        
+        if response.actionIdentifier == "completed" {
+            print("press completed action")
             
-        }else if response.actionIdentifier == "addVegi"{
-            print("press addVegi action")
-            //            addNewTodoOnly(withTitle: "press addVegi action from \(response.notification.request.identifier)")
+            let identifier = response.notification.request.identifier
+            var todoItem = DataManager.load(identifier, with: ToDoItem.self)
+            todoItem.maskAsCompleted()
+            
+        }else if response.actionIdentifier == "cancel"{
+            print("press cancel action")
         }else{
             print("press nothing at all")
         }
