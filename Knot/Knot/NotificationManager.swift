@@ -5,7 +5,6 @@
 //  Created by liubo on 2018/3/4.
 //  Copyright © 2018年 liubo. All rights reserved.
 //
-
 import Foundation
 import UserNotifications
 
@@ -44,7 +43,6 @@ public class NotificationManager {
         content.title = "新的一天"
         content.body = "要不要来做做看？"
         content.sound = UNNotificationSound.default()
-        content.badge
         
         let request = UNNotificationRequest(identifier: "_daily_notification_identifier", content: content, trigger: trigger)
         
