@@ -374,20 +374,12 @@
                     <rect key="frame" x="0.0" y="0.0" width="327" height="234"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dal-9h-8so">
-                            <rect key="frame" x="145" y="184" width="37" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <state key="normal" title="Done"/>
-                            <connections>
-                                <action selector="dismissPopup:" destination="3ow-NZ-8Na" eventType="touchUpInside" id="NNO-QP-XtO"/>
-                            </connections>
-                        </button>
                         <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="todo Item Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Ki-jI-50R">
-                            <rect key="frame" x="16" y="141.5" width="295" height="30"/>
+                            <rect key="frame" x="16" y="142" width="295" height="30"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                         </textField>
                         <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="1iH-G7-YMv">
                             <rect key="frame" x="0.0" y="49" width="327" height="93"/>

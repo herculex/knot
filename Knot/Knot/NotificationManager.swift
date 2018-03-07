@@ -21,6 +21,7 @@ public class NotificationManager {
         content.body = title
         content.sound = UNNotificationSound.default()
         content.categoryIdentifier = "todoCategeroy"
+        content.badge = 1
         
         let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
         
@@ -43,6 +44,7 @@ public class NotificationManager {
         content.title = "新的一天"
         content.body = "要不要来做做看？"
         content.sound = UNNotificationSound.default()
+        content.badge = 1
         
         let request = UNNotificationRequest(identifier: "_daily_notification_identifier", content: content, trigger: trigger)
         

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContainerViewController: UIViewController {
+class ContainerViewController: UIViewController,UITextFieldDelegate {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var connectionButton: UIButton!
@@ -23,24 +23,6 @@ class ContainerViewController: UIViewController {
     
     @IBOutlet var visualEffectBlur: UIVisualEffectView!
 
-    @IBAction func dismissPopup(_ sender: UIButton) {
-        //
-        print("select reminder:\(reminder.date)")
-        todoTableViewController.addNewTodoAt(withTitle: addText.text!, at: reminder.date)
-        addText.text = nil
-        addText.resignFirstResponder()
-        
-        //animateOut
-        UIView.animate(withDuration: 0.2, animations: {
-            self.addItemView.transform = CGAffineTransform.init(scaleX: 1.4, y: 1.4)
-            self.addItemView.alpha = 0
-            self.visualEffectBlur.effect = nil
-        }) { (sucess) in
-            self.addItemView.removeFromSuperview()
-            self.visualEffectBlur.removeFromSuperview()
-        }
-        //animateOut
-    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -59,6 +41,9 @@ class ContainerViewController: UIViewController {
         addButtonTrail.constant -= view.bounds.width
         
         addButton.layer.cornerRadius = addButton.frame.size.width / 2
+        
+        addText.returnKeyType = .done
+        addText.delegate = self
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -88,9 +73,30 @@ class ContainerViewController: UIViewController {
         //animateIn
         
         addText.becomeFirstResponder()
-        
+
 //        todoTableViewController.addNewTodo()
     }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("got return but done display")
+        print("select reminder:\(reminder.date)")
+        todoTableViewController.addNewTodoAt(withTitle: addText.text!, at: reminder.date)
+        addText.text = nil
+        addText.resignFirstResponder()
+        
+        //animateOut
+        UIView.animate(withDuration: 0.2, animations: {
+            self.addItemView.transform = CGAffineTransform.init(scaleX: 1.4, y: 1.4)
+            self.addItemView.alpha = 0
+            self.visualEffectBlur.effect = nil
+        }) { (sucess) in
+            self.addItemView.removeFromSuperview()
+            self.visualEffectBlur.removeFromSuperview()
+        }
+        //animateOut
+        return true
+    }
+    
     @IBAction func triggerConnection(_ sender: UIButton) {
         todoTableViewController.showConnectivityAction()
     }
