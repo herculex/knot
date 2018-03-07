@@ -15,7 +15,7 @@ public class NotificationManager {
         let dateCompents = calendar.dateComponents([.year,.month,.day,.hour,.minute], from: reminder)
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateCompents, repeats: false)
-        
+
         let content = UNMutableNotificationContent()
         content.title = "未完成"
         content.body = title

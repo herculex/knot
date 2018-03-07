@@ -102,9 +102,7 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
     func loadData() {
         let rawItems = DataManager.loadAll(ToDoItem.self).sorted(by: {$0.createdAt > $1.createdAt})
         todoItems = [ToDoItem]()
-        todoItems = rawItems.filter({!$0.completed})
-        UIApplication.shared.applicationIconBadgeNumber = todoItems.count
-        
+        todoItems = rawItems.filter({!$0.completed})        
         todoItems.append(contentsOf: rawItems.filter({$0.completed}).sorted(by: {$0.completedAt > $1.completedAt}))
     }
     

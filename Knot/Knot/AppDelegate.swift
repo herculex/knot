@@ -41,8 +41,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         //Set up a Daily Reminder of A brand new day.
         NotificationManager.scheduleDaily()
         
+        //
+        NotificationCenter.default.addObserver(self, selector: #selector(clearBadgeNumber), name: .UIApplicationWillEnterForeground, object: nil)
         return true
     }
+    @objc
+    func clearBadgeNumber() {
+        UIApplication.shared.applicationIconBadgeNumber = 0
+    }
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
         print("notification willPresent:\(notification.request.identifier)")
