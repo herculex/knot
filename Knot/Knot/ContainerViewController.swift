@@ -55,32 +55,45 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
 
     @IBOutlet var addItemView: UIView!
     @IBAction func addNewTodoItem(_ sender: UIButton) {
-        
-        //animateIn
-        self.view.addSubview(visualEffectBlur)
-        visualEffectBlur.frame = self.view.frame
-        
-        self.view.addSubview(addItemView)
-        addItemView.center = self.view.center
-        addItemView.transform = addItemView.transform.scaledBy(x: 1.3, y: 1.3)
-//        addItemView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
-        
-        UIView.animate(withDuration: 0.5) {
-            self.addItemView.alpha = 1
-            self.addItemView.transform = CGAffineTransform.identity
-            self.visualEffectBlur.effect = self.effectBlur
-        }
-        //animateIn
-        
-        addText.becomeFirstResponder()
-
-//        todoTableViewController.addNewTodo()
+        animateIn()
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("got return but done display")
         print("select reminder:\(reminder.date)")
         todoTableViewController.addNewTodoAt(withTitle: addText.text!, at: reminder.date)
+        animateOut()
+        
+        return true
+    }
+    
+    @IBAction func triggerConnection(_ sender: UIButton) {
+        todoTableViewController.showConnectivityAction()
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: - animate In & Out of Pop-up
+    
+    func animateIn() {
+        self.view.addSubview(visualEffectBlur)
+        visualEffectBlur.frame = self.view.frame
+        
+        self.view.addSubview(addItemView)
+        addItemView.center = self.view.center
+        addItemView.transform = addItemView.transform.scaledBy(x: 1.3, y: 1.3)
+        //        addItemView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        
+        UIView.animate(withDuration: 0.5) {
+            self.addItemView.alpha = 1
+            self.addItemView.transform = CGAffineTransform.identity
+            self.visualEffectBlur.effect = self.effectBlur
+        }
+        addText.becomeFirstResponder()
+    }
+    
+    func animateOut() {
         addText.text = nil
         addText.resignFirstResponder()
         
@@ -92,16 +105,6 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
         }) { (sucess) in
             self.addItemView.removeFromSuperview()
             self.visualEffectBlur.removeFromSuperview()
-        }
-        //animateOut
-        return true
-    }
-    
-    @IBAction func triggerConnection(_ sender: UIButton) {
-        todoTableViewController.showConnectivityAction()
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
+        }    }
     
 }
