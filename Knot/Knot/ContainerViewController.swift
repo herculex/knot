@@ -10,6 +10,9 @@ import UIKit
 
 class ContainerViewController: UIViewController,UITextFieldDelegate {
 
+    @IBOutlet weak var blurView: UIVisualEffectView!
+    @IBOutlet weak var sideViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sideView: UIView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var connectionButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
@@ -44,6 +47,15 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
         
         addText.returnKeyType = .done
         addText.delegate = self
+        
+        blurView.layer.cornerRadius = 15
+        sideView.layer.shadowOffset = CGSize(width: 3, height: 0)
+        sideView.layer.shadowColor = UIColor.black.cgColor
+        sideView.layer.shadowOpacity = 0.8
+        
+        sideViewConstraint.constant -= sideView.bounds.size.width
+        
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -70,6 +82,17 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
     @IBAction func triggerConnection(_ sender: UIButton) {
         todoTableViewController.showConnectivityAction()
     }
+    
+    @IBAction func swipeSideView(_ sender: UIScreenEdgePanGestureRecognizer) {
+        if sender.state == .began || sender.state == .changed{
+            let tranX = sender.translation(in: self.view)
+            print("tranX in self.view:\(tranX)")
+            
+        }else if sender.state == .ended{
+            
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -105,6 +128,8 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
         }) { (sucess) in
             self.addItemView.removeFromSuperview()
             self.visualEffectBlur.removeFromSuperview()
-        }    }
+        }
+        
+    }
     
 }

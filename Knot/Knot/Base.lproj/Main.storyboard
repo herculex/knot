@@ -320,6 +320,27 @@
                                     <segue destination="c1S-9l-yNO" kind="embed" identifier="todoVC" id="hYa-0x-epc"/>
                                 </connections>
                             </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l9D-1p-NOi">
+                                <rect key="frame" x="0.0" y="40" width="214" height="676"/>
+                                <subviews>
+                                    <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F6g-RC-SvI">
+                                        <rect key="frame" x="0.0" y="0.0" width="214" height="676"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="r07-xP-nyg">
+                                            <rect key="frame" x="0.0" y="0.0" width="214" height="676"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        </view>
+                                        <blurEffect style="light"/>
+                                    </visualEffectView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="214" id="BOL-bj-Ecq"/>
+                                    <constraint firstItem="F6g-RC-SvI" firstAttribute="centerY" secondItem="l9D-1p-NOi" secondAttribute="centerY" id="Xzn-QR-AsL"/>
+                                    <constraint firstItem="F6g-RC-SvI" firstAttribute="height" secondItem="l9D-1p-NOi" secondAttribute="height" id="asn-Tb-1y0"/>
+                                    <constraint firstItem="F6g-RC-SvI" firstAttribute="width" secondItem="l9D-1p-NOi" secondAttribute="width" id="vGt-bQ-uWd"/>
+                                    <constraint firstItem="F6g-RC-SvI" firstAttribute="centerX" secondItem="l9D-1p-NOi" secondAttribute="centerX" id="xEA-2L-7Xf"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -328,11 +349,14 @@
                             <constraint firstItem="aAX-vS-1ow" firstAttribute="leading" secondItem="Su5-1m-SR1" secondAttribute="leading" id="9Pu-3h-Ckd"/>
                             <constraint firstItem="pk1-Mh-02I" firstAttribute="top" secondItem="aAX-vS-1ow" secondAttribute="bottom" constant="15" id="FqV-Kb-qir"/>
                             <constraint firstItem="vut-Q1-2w1" firstAttribute="centerY" secondItem="4ba-uG-oAs" secondAttribute="centerY" constant="-2" id="G16-jY-6UA"/>
+                            <constraint firstItem="l9D-1p-NOi" firstAttribute="bottom" secondItem="Su5-1m-SR1" secondAttribute="bottom" constant="-20" id="LaT-1Y-v2R"/>
                             <constraint firstItem="Su5-1m-SR1" firstAttribute="trailing" secondItem="aAX-vS-1ow" secondAttribute="trailing" id="LrG-vf-fLx"/>
                             <constraint firstItem="Su5-1m-SR1" firstAttribute="bottom" secondItem="4ba-uG-oAs" secondAttribute="bottom" constant="20" id="dGx-z9-G3i"/>
+                            <constraint firstItem="l9D-1p-NOi" firstAttribute="leading" secondItem="aAX-vS-1ow" secondAttribute="leading" id="eCK-KC-DVt"/>
                             <constraint firstItem="vut-Q1-2w1" firstAttribute="leading" secondItem="4ba-uG-oAs" secondAttribute="trailing" constant="8" id="eem-42-Eh9"/>
                             <constraint firstItem="Su5-1m-SR1" firstAttribute="trailing" secondItem="pk1-Mh-02I" secondAttribute="trailing" constant="20" id="h2E-rf-2JI"/>
                             <constraint firstItem="4ba-uG-oAs" firstAttribute="top" secondItem="aAX-vS-1ow" secondAttribute="bottom" constant="30" id="iRR-da-Ze4"/>
+                            <constraint firstItem="l9D-1p-NOi" firstAttribute="top" secondItem="aAX-vS-1ow" secondAttribute="top" constant="40" id="rJh-pe-4hL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Su5-1m-SR1"/>
                     </view>
@@ -341,9 +365,12 @@
                         <outlet property="addButtonTrail" destination="h2E-rf-2JI" id="UJk-BR-mrv"/>
                         <outlet property="addItemView" destination="eLC-oK-v5e" id="rXC-P9-QME"/>
                         <outlet property="addText" destination="0Ki-jI-50R" id="XGL-IH-NrF"/>
+                        <outlet property="blurView" destination="F6g-RC-SvI" id="bcs-Ji-rk5"/>
                         <outlet property="connectionButton" destination="vut-Q1-2w1" id="ZZH-Vn-h2t"/>
                         <outlet property="containerView" destination="aAX-vS-1ow" id="2dV-zl-1ON"/>
                         <outlet property="reminder" destination="1iH-G7-YMv" id="vhL-ug-Hl7"/>
+                        <outlet property="sideView" destination="l9D-1p-NOi" id="6JT-HS-uhv"/>
+                        <outlet property="sideViewConstraint" destination="eCK-KC-DVt" id="FhL-4V-go2"/>
                         <outlet property="visualEffectBlur" destination="veD-FH-SeD" id="XAS-mT-vd9"/>
                     </connections>
                 </viewController>
@@ -399,8 +426,13 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <viewLayoutGuide key="safeArea" id="wUV-DR-e2X"/>
                 </view>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="LA5-F9-SDK">
+                    <connections>
+                        <action selector="swipeSideView:" destination="3ow-NZ-8Na" id="v0e-R9-mhm"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1878.2608695652175" y="-214.4021739130435"/>
+            <point key="canvasLocation" x="-1879.2" y="-215.02463054187194"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fWn-pQ-3pl">
