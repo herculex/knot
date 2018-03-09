@@ -121,6 +121,13 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
             }
         }
     }
+    @IBAction func dissmisSideView(_ sender: Any) {
+        UIView.animate(withDuration: 0.3, animations: {
+            
+            self.sideViewConstraint.constant = -self.sideView.bounds.size.width
+            self.view.layoutIfNeeded()            
+        })
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
