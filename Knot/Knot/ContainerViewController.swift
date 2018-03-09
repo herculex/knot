@@ -22,11 +22,12 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var reminder: UIDatePicker!
     @IBOutlet weak var addButtonTrail: NSLayoutConstraint!
     var todoTableViewController:ToDoTableViewController!
-    
     var effectBlur:UIVisualEffect!
     
     @IBOutlet var visualEffectBlur: UIVisualEffectView!
 
+    var sideViewIsShowing:Bool!
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -43,9 +44,7 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
         addItemView.layer.cornerRadius = 10
         
         addButtonTrail.constant -= view.bounds.width
-        
-        addButton.layer.cornerRadius = addButton.frame.size.width / 2
-        
+                
         addText.returnKeyType = .done
         addText.delegate = self
         
@@ -55,6 +54,7 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
         sideView.layer.shadowOpacity = 0.8
         
         sideViewConstraint.constant -= sideView.bounds.size.width
+        sideViewIsShowing = false
 
     }
     
@@ -88,6 +88,8 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
         
         print("swiping detected.\(sender.translation(in: self.view).x)")
         
+        if sideViewIsShowing { return }
+        
         if sender.state == .began || sender.state == .changed{
             let tranX = sender.translation(in: self.view).x
             
@@ -109,14 +111,17 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
                     self.view.layoutIfNeeded()
                     
                     print("ended side constraint \(self.sideViewConstraint.constant)")
+                }, completion: { (sucess) in
+                    self.sideViewIsShowing = false
                 })
             }else{
-                UIView.animate(withDuration: 0.2, animations: {
-                    
+                UIView.animate(withDuration: 0.3, animations: {
                     self.sideViewConstraint.constant = 20
                     self.view.layoutIfNeeded()
                     
                     print("ended side constraint \(self.sideViewConstraint.constant)")
+                }, completion: { (sucess) in
+                    self.sideViewIsShowing = true
                 })
             }
         }
@@ -126,6 +131,8 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
             
             self.sideViewConstraint.constant = -self.sideView.bounds.size.width
             self.view.layoutIfNeeded()            
+        },completion: { (sucess) in
+            self.sideViewIsShowing = false
         })
     }
     
