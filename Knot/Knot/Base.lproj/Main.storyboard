@@ -321,12 +321,12 @@
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l9D-1p-NOi">
-                                <rect key="frame" x="0.0" y="40" width="214" height="676"/>
+                                <rect key="frame" x="0.0" y="120" width="214" height="516"/>
                                 <subviews>
                                     <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F6g-RC-SvI">
-                                        <rect key="frame" x="0.0" y="0.0" width="214" height="676"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="214" height="516"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="r07-xP-nyg">
-                                            <rect key="frame" x="0.0" y="0.0" width="214" height="676"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="214" height="516"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         </view>
                                         <blurEffect style="light"/>
@@ -343,22 +343,26 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Su5-1m-SR1" firstAttribute="top" secondItem="aAX-vS-1ow" secondAttribute="top" constant="20" id="1Wi-3e-uI6"/>
                             <constraint firstItem="4ba-uG-oAs" firstAttribute="leading" secondItem="Su5-1m-SR1" secondAttribute="leading" constant="20" id="7dg-NM-EH4"/>
                             <constraint firstItem="aAX-vS-1ow" firstAttribute="leading" secondItem="Su5-1m-SR1" secondAttribute="leading" id="9Pu-3h-Ckd"/>
                             <constraint firstItem="pk1-Mh-02I" firstAttribute="top" secondItem="aAX-vS-1ow" secondAttribute="bottom" constant="15" id="FqV-Kb-qir"/>
                             <constraint firstItem="vut-Q1-2w1" firstAttribute="centerY" secondItem="4ba-uG-oAs" secondAttribute="centerY" constant="-2" id="G16-jY-6UA"/>
-                            <constraint firstItem="l9D-1p-NOi" firstAttribute="bottom" secondItem="Su5-1m-SR1" secondAttribute="bottom" constant="-20" id="LaT-1Y-v2R"/>
+                            <constraint firstItem="l9D-1p-NOi" firstAttribute="bottom" secondItem="Su5-1m-SR1" secondAttribute="bottom" constant="-100" id="LaT-1Y-v2R"/>
                             <constraint firstItem="Su5-1m-SR1" firstAttribute="trailing" secondItem="aAX-vS-1ow" secondAttribute="trailing" id="LrG-vf-fLx"/>
                             <constraint firstItem="Su5-1m-SR1" firstAttribute="bottom" secondItem="4ba-uG-oAs" secondAttribute="bottom" constant="20" id="dGx-z9-G3i"/>
                             <constraint firstItem="l9D-1p-NOi" firstAttribute="leading" secondItem="aAX-vS-1ow" secondAttribute="leading" id="eCK-KC-DVt"/>
                             <constraint firstItem="vut-Q1-2w1" firstAttribute="leading" secondItem="4ba-uG-oAs" secondAttribute="trailing" constant="8" id="eem-42-Eh9"/>
                             <constraint firstItem="Su5-1m-SR1" firstAttribute="trailing" secondItem="pk1-Mh-02I" secondAttribute="trailing" constant="20" id="h2E-rf-2JI"/>
                             <constraint firstItem="4ba-uG-oAs" firstAttribute="top" secondItem="aAX-vS-1ow" secondAttribute="bottom" constant="30" id="iRR-da-Ze4"/>
-                            <constraint firstItem="l9D-1p-NOi" firstAttribute="top" secondItem="aAX-vS-1ow" secondAttribute="top" constant="40" id="rJh-pe-4hL"/>
+                            <constraint firstItem="l9D-1p-NOi" firstAttribute="top" secondItem="Su5-1m-SR1" secondAttribute="top" constant="100" id="rJh-pe-4hL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Su5-1m-SR1"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Erh-vh-R07" appends="YES" id="qEC-m8-MJY"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="addButton" destination="pk1-Mh-02I" id="pbo-J2-YXY"/>
@@ -368,6 +372,7 @@
                         <outlet property="blurView" destination="F6g-RC-SvI" id="bcs-Ji-rk5"/>
                         <outlet property="connectionButton" destination="vut-Q1-2w1" id="ZZH-Vn-h2t"/>
                         <outlet property="containerView" destination="aAX-vS-1ow" id="2dV-zl-1ON"/>
+                        <outlet property="edgePanGesture" destination="Erh-vh-R07" id="vt3-6q-IyI"/>
                         <outlet property="reminder" destination="1iH-G7-YMv" id="vhL-ug-Hl7"/>
                         <outlet property="sideView" destination="l9D-1p-NOi" id="6JT-HS-uhv"/>
                         <outlet property="sideViewConstraint" destination="eCK-KC-DVt" id="FhL-4V-go2"/>
@@ -426,9 +431,10 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <viewLayoutGuide key="safeArea" id="wUV-DR-e2X"/>
                 </view>
-                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="LA5-F9-SDK">
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="Erh-vh-R07">
+                    <rectEdge key="edges" left="YES"/>
                     <connections>
-                        <action selector="swipeSideView:" destination="3ow-NZ-8Na" id="v0e-R9-mhm"/>
+                        <action selector="swipeSideView:" destination="3ow-NZ-8Na" id="TFa-aR-6HJ"/>
                     </connections>
                 </screenEdgePanGestureRecognizer>
             </objects>

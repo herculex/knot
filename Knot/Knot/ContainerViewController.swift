@@ -10,6 +10,7 @@ import UIKit
 
 class ContainerViewController: UIViewController,UITextFieldDelegate {
 
+    @IBOutlet var edgePanGesture: UIScreenEdgePanGestureRecognizer!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var sideViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var sideView: UIView!
@@ -54,8 +55,7 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
         sideView.layer.shadowOpacity = 0.8
         
         sideViewConstraint.constant -= sideView.bounds.size.width
-        
-        
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -83,13 +83,42 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
         todoTableViewController.showConnectivityAction()
     }
     
+
     @IBAction func swipeSideView(_ sender: UIScreenEdgePanGestureRecognizer) {
+        
+        print("swiping detected.\(sender.translation(in: self.view).x)")
+        
         if sender.state == .began || sender.state == .changed{
-            let tranX = sender.translation(in: self.view)
-            print("tranX in self.view:\(tranX)")
+            let tranX = sender.translation(in: self.view).x
+            
+            if sideViewConstraint.constant < 40 {
+                UIView.animate(withDuration: 0.2, animations: {
+                    
+                    self.sideViewConstraint.constant = tranX - self.sideView.bounds.size.width
+                    self.view.layoutIfNeeded()
+                    
+                    print("swipe side constraint \(self.sideViewConstraint.constant)")
+                })
+            }
             
         }else if sender.state == .ended{
-            
+            if sideViewConstraint.constant < -(sideView.bounds.width/2) {
+                UIView.animate(withDuration: 0.2, animations: {
+                    
+                    self.sideViewConstraint.constant = -self.sideView.bounds.width
+                    self.view.layoutIfNeeded()
+                    
+                    print("ended side constraint \(self.sideViewConstraint.constant)")
+                })
+            }else{
+                UIView.animate(withDuration: 0.2, animations: {
+                    
+                    self.sideViewConstraint.constant = 20
+                    self.view.layoutIfNeeded()
+                    
+                    print("ended side constraint \(self.sideViewConstraint.constant)")
+                })
+            }
         }
     }
     
