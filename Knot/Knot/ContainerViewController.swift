@@ -10,6 +10,7 @@ import UIKit
 
 class ContainerViewController: UIViewController,UITextFieldDelegate {
 
+    @IBOutlet weak var addTextView: UIView!
     @IBOutlet var edgePanGesture: UIScreenEdgePanGestureRecognizer!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var sideViewConstraint: NSLayoutConstraint!
@@ -55,6 +56,17 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
         
         sideViewConstraint.constant -= sideView.bounds.size.width
         sideViewIsShowing = false
+        
+        addTextView.layer.cornerRadius = 15
+        addTextView.layer.shadowOffset = CGSize(width: 3, height: 0)
+        addTextView.layer.shadowColor = UIColor.black.cgColor
+        addTextView.layer.shadowOpacity = 0.8
+        
+        
+        addItemView.layer.cornerRadius = 15
+        addItemView.layer.shadowOffset = CGSize(width: 3, height: 0)
+        addItemView.layer.shadowColor = UIColor.black.cgColor
+        addItemView.layer.shadowOpacity = 0.8
 
     }
     
@@ -146,8 +158,8 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
         self.view.addSubview(visualEffectBlur)
         visualEffectBlur.frame = self.view.frame
         
-        self.view.addSubview(addItemView)
-        addItemView.center = self.view.center
+//        self.view.addSubview(addItemView)
+//        addItemView.center = self.view.center
         addItemView.transform = addItemView.transform.scaledBy(x: 1.3, y: 1.3)
         //        addItemView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         
@@ -169,7 +181,7 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
             self.addItemView.alpha = 0
             self.visualEffectBlur.effect = nil
         }) { (sucess) in
-            self.addItemView.removeFromSuperview()
+//            self.addItemView.removeFromSuperview()
             self.visualEffectBlur.removeFromSuperview()
         }
         
