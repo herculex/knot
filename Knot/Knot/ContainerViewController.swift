@@ -10,8 +10,9 @@ import UIKit
 
 class ContainerViewController: UIViewController,UITextFieldDelegate {
 
+    @IBOutlet var blurAddView: UIVisualEffectView!
     @IBOutlet var edgePanGesture: UIScreenEdgePanGestureRecognizer!
-    @IBOutlet weak var blurView: UIVisualEffectView!
+    @IBOutlet weak var blurSideView: UIVisualEffectView!
     @IBOutlet weak var sideViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var sideView: UIView!
     @IBOutlet weak var containerView: UIView!
@@ -19,12 +20,14 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var addText: UITextField!
     
+    @IBOutlet weak var addItemView: UIView!
     @IBOutlet weak var reminder: UIDatePicker!
     @IBOutlet weak var addButtonTrail: NSLayoutConstraint!
     var todoTableViewController:ToDoTableViewController!
-    var effectBlur:UIVisualEffect!
+    var effectBlurOfBlurReminderView:UIVisualEffect!
+    var effectBlurOfBlurAddView:UIVisualEffect!
     
-    @IBOutlet var visualEffectBlur: UIVisualEffectView!
+    @IBOutlet var blurReminderView: UIVisualEffectView!
 
     var sideViewIsShowing:Bool!
     
@@ -39,16 +42,23 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        effectBlur = visualEffectBlur.effect
-        visualEffectBlur.effect = nil
-        addItemView.layer.cornerRadius = 10
+        effectBlurOfBlurReminderView = blurReminderView.effect
+        blurReminderView.effect = nil
         
-        addButtonTrail.constant -= view.bounds.width
-                
+        effectBlurOfBlurAddView = blurAddView.effect
+        blurAddView.effect = nil
+               
         addText.returnKeyType = .done
         addText.delegate = self
         
-        blurView.layer.cornerRadius = 15
+        addItemView.layer.cornerRadius = 10
+        addItemView.layer.shadowOffset = CGSize(width: 3, height: 0)
+        addItemView.layer.shadowColor = UIColor.black.cgColor
+        addItemView.layer.shadowOpacity = 0.8
+        
+        addButtonTrail.constant -= view.bounds.width
+        
+        blurSideView.layer.cornerRadius = 15
         sideView.layer.shadowOffset = CGSize(width: 3, height: 0)
         sideView.layer.shadowColor = UIColor.black.cgColor
         sideView.layer.shadowOpacity = 0.8
@@ -56,11 +66,10 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
         sideViewConstraint.constant -= sideView.bounds.size.width
         sideViewIsShowing = false
       
-        
-        addItemView.layer.cornerRadius = 15
-        addItemView.layer.shadowOffset = CGSize(width: 3, height: 0)
-        addItemView.layer.shadowColor = UIColor.black.cgColor
-        addItemView.layer.shadowOpacity = 0.8
+        reminderView.layer.cornerRadius = 15
+        reminderView.layer.shadowOffset = CGSize(width: 3, height: 0)
+        reminderView.layer.shadowColor = UIColor.black.cgColor
+        reminderView.layer.shadowOpacity = 0.8
 
     }
     
@@ -71,16 +80,18 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
         }
     }
 
-    @IBOutlet var addItemView: UIView!
+    @IBOutlet var reminderView: UIView!
     @IBAction func addNewTodoItem(_ sender: UIButton) {
-        animateIn()
+        addViewAnimateIn()
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("got return but done display")
-        print("select reminder:\(reminder.date)")
-        todoTableViewController.addNewTodoAt(withTitle: addText.text!, at: reminder.date)
-        animateOut()
+//        print("select reminder:\(reminder.date)")
+//        todoTableViewController.addNewTodoAt(withTitle: addText.text!, at: reminder.date)
+        
+        todoTableViewController.addNewTodo(withTitle: addText.text!)
+        addViewAnimateOut()
         
         return true
     }
@@ -142,43 +153,64 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
         })
     }
     
+    @IBAction func dismissAddItemView(_ sender: Any) {
+        addViewAnimateOut()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
     // MARK: - animate In & Out of Pop-up
     
-    func animateIn() {
-        self.view.addSubview(visualEffectBlur)
-        visualEffectBlur.frame = self.view.frame
+    func addViewAnimateIn(){
+        self.view.addSubview(blurAddView)
+        blurAddView.frame = self.view.frame
         
-//        self.view.addSubview(addItemView)
-//        addItemView.center = self.view.center
-        addItemView.transform = addItemView.transform.scaledBy(x: 1.3, y: 1.3)
-        //        addItemView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
-        
+        addText.transform = addText.transform.scaledBy(x: 1.2, y: 1.2)
+
         UIView.animate(withDuration: 0.5) {
-            self.addItemView.alpha = 1
-            self.addItemView.transform = CGAffineTransform.identity
-            self.visualEffectBlur.effect = self.effectBlur
+            self.addText.alpha = 1
+            self.addText.transform = CGAffineTransform.identity
+            self.blurAddView.effect = self.effectBlurOfBlurAddView
         }
         addText.becomeFirstResponder()
     }
-    
-    func animateOut() {
+    func addViewAnimateOut(){
         addText.text = nil
         addText.resignFirstResponder()
         
-        //animateOut
         UIView.animate(withDuration: 0.2, animations: {
-            self.addItemView.transform = CGAffineTransform.init(scaleX: 1.4, y: 1.4)
-            self.addItemView.alpha = 0
-            self.visualEffectBlur.effect = nil
+            self.addText.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.addText.alpha = 0
+            self.blurAddView.effect = nil
         }) { (sucess) in
-//            self.addItemView.removeFromSuperview()
-            self.visualEffectBlur.removeFromSuperview()
+            self.blurAddView.removeFromSuperview()
         }
+    }
+    
+    func animateIn() {
+        self.view.addSubview(blurReminderView)
+        blurReminderView.frame = self.view.frame
         
+        reminderView.transform = reminderView.transform.scaledBy(x: 1.2, y: 1.2)
+        
+        UIView.animate(withDuration: 0.5) {
+            self.reminderView.alpha = 1
+            self.reminderView.transform = CGAffineTransform.identity
+            self.blurReminderView.effect = self.effectBlurOfBlurReminderView
+        }
+        reminder.date = Date()
+    }
+    
+    func animateOut() {
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.reminderView.transform = CGAffineTransform.init(scaleX: 1.4, y: 1.4)
+            self.reminderView.alpha = 0
+            self.blurReminderView.effect = nil
+        }) { (sucess) in
+            self.blurReminderView.removeFromSuperview()
+        }
     }
     
 }
