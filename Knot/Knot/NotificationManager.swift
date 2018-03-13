@@ -17,7 +17,6 @@ public class NotificationManager {
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateCompents, repeats: false)
 
         let content = UNMutableNotificationContent()
-        content.title = "未完成"
         content.body = title
         content.sound = UNNotificationSound.default()
         content.categoryIdentifier = "todoCategeroy"
