@@ -389,15 +389,16 @@
                     <connections>
                         <outlet property="addButton" destination="pk1-Mh-02I" id="pbo-J2-YXY"/>
                         <outlet property="addButtonTrail" destination="h2E-rf-2JI" id="UJk-BR-mrv"/>
-                        <outlet property="addItemView" destination="1eI-Hf-cU7" id="0TJ-gp-lu0"/>
+                        <outlet property="addItemView" destination="1eI-Hf-cU7" id="ylx-0l-OP5"/>
                         <outlet property="addText" destination="0Ki-jI-50R" id="XGL-IH-NrF"/>
                         <outlet property="blurAddView" destination="wMi-DH-j2h" id="MRJ-83-Gvv"/>
-                        <outlet property="blurReminderView" destination="veD-FH-SeD" id="XAS-mT-vd9"/>
                         <outlet property="blurSideView" destination="F6g-RC-SvI" id="bcs-Ji-rk5"/>
                         <outlet property="connectionButton" destination="vut-Q1-2w1" id="ZZH-Vn-h2t"/>
                         <outlet property="containerView" destination="aAX-vS-1ow" id="2dV-zl-1ON"/>
                         <outlet property="edgePanGesture" destination="Erh-vh-R07" id="vt3-6q-IyI"/>
                         <outlet property="reminder" destination="1iH-G7-YMv" id="vhL-ug-Hl7"/>
+                        <outlet property="reminderButton" destination="Ztf-FS-CYf" id="8Fd-TS-oJy"/>
+                        <outlet property="reminderConstraint" destination="xrv-w4-POj" id="QtG-Gp-SSi"/>
                         <outlet property="reminderView" destination="eLC-oK-v5e" id="rXC-P9-QME"/>
                         <outlet property="sideView" destination="l9D-1p-NOi" id="6JT-HS-uhv"/>
                         <outlet property="sideViewConstraint" destination="eCK-KC-DVt" id="FhL-4V-go2"/>
@@ -405,14 +406,48 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KW7-jy-86m" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <visualEffectView opaque="NO" contentMode="scaleToFill" id="wMi-DH-j2h">
-                    <rect key="frame" x="0.0" y="0.0" width="368" height="209"/>
+                    <rect key="frame" x="0.0" y="0.0" width="368" height="510"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="n6L-eC-99v">
-                        <rect key="frame" x="0.0" y="0.0" width="368" height="209"/>
+                        <rect key="frame" x="0.0" y="0.0" width="368" height="510"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eLC-oK-v5e">
+                                <rect key="frame" x="21" y="100" width="327" height="234"/>
+                                <subviews>
+                                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="1iH-G7-YMv">
+                                        <rect key="frame" x="3" y="31" width="320" height="160"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="541761492.21603894">
+                                            <!--2018-03-03 09:18:12 +0000-->
+                                        </date>
+                                    </datePicker>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebA-Ua-9CR">
+                                        <rect key="frame" x="8" y="196" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <state key="normal" title="移除"/>
+                                        <connections>
+                                            <action selector="removeReminder:" destination="3ow-NZ-8Na" eventType="touchUpInside" id="Nsf-Yg-Oje"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNd-Ab-nx2">
+                                        <rect key="frame" x="273" y="195" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <state key="normal" title="确定"/>
+                                        <connections>
+                                            <action selector="confirmReminder:" destination="3ow-NZ-8Na" eventType="touchUpInside" id="zJD-5U-Wjz"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="234" id="elP-gl-1eK"/>
+                                    <constraint firstAttribute="width" constant="327" id="zfJ-27-CLJ"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="wUV-DR-e2X"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1eI-Hf-cU7">
-                                <rect key="frame" x="25" y="30" width="319" height="91"/>
+                                <rect key="frame" x="21" y="30" width="327" height="91"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VHg-CH-g8R">
                                         <rect key="frame" x="299" y="0.0" width="20" height="20"/>
@@ -430,88 +465,45 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="todo Item Title" textAlignment="natural" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="0Ki-jI-50R">
-                                        <rect key="frame" x="10" y="20" width="299" height="50"/>
+                                        <rect key="frame" x="8" y="20" width="311" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="tJm-zG-1l5"/>
+                                            <constraint firstAttribute="height" constant="40" id="2Jg-WK-Fy7"/>
+                                            <constraint firstAttribute="width" constant="311" id="lsD-CD-Rih"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="VHg-CH-g8R" firstAttribute="top" secondItem="1eI-Hf-cU7" secondAttribute="top" id="B0I-sa-zvu"/>
-                                    <constraint firstAttribute="trailing" secondItem="0Ki-jI-50R" secondAttribute="trailing" constant="10" id="FqZ-nh-PEU"/>
-                                    <constraint firstItem="0Ki-jI-50R" firstAttribute="centerX" secondItem="1eI-Hf-cU7" secondAttribute="centerX" id="KWZ-5q-PTY"/>
-                                    <constraint firstAttribute="height" constant="91" id="QGV-lf-eYj"/>
-                                    <constraint firstItem="0Ki-jI-50R" firstAttribute="leading" secondItem="1eI-Hf-cU7" secondAttribute="leading" constant="10" id="aGp-W8-lKf"/>
-                                    <constraint firstItem="0Ki-jI-50R" firstAttribute="top" secondItem="1eI-Hf-cU7" secondAttribute="top" constant="20" id="ge5-00-Yxt"/>
-                                    <constraint firstAttribute="trailing" secondItem="VHg-CH-g8R" secondAttribute="trailing" id="ngT-dw-fN6"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="1eI-Hf-cU7" firstAttribute="leading" secondItem="n6L-eC-99v" secondAttribute="leading" constant="25" id="Thv-rw-4nR"/>
-                            <constraint firstAttribute="trailing" secondItem="1eI-Hf-cU7" secondAttribute="trailing" constant="24" id="VyB-sF-4jf"/>
-                            <constraint firstItem="1eI-Hf-cU7" firstAttribute="centerX" secondItem="n6L-eC-99v" secondAttribute="centerX" id="goh-hN-xiJ"/>
-                            <constraint firstItem="1eI-Hf-cU7" firstAttribute="top" secondItem="n6L-eC-99v" secondAttribute="top" constant="30" id="rDF-4I-Qcs"/>
-                        </constraints>
-                    </view>
-                    <blurEffect style="light"/>
-                </visualEffectView>
-                <visualEffectView opaque="NO" contentMode="scaleToFill" id="veD-FH-SeD">
-                    <rect key="frame" x="0.0" y="0.0" width="413" height="426"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="5iI-Nh-PDE">
-                        <rect key="frame" x="0.0" y="0.0" width="413" height="426"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eLC-oK-v5e">
-                                <rect key="frame" x="43" y="54" width="327" height="234"/>
-                                <subviews>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="1iH-G7-YMv">
-                                        <rect key="frame" x="4" y="42" width="320" height="162"/>
-                                        <date key="date" timeIntervalSinceReferenceDate="541761492.21603894">
-                                            <!--2018-03-03 09:18:12 +0000-->
-                                        </date>
-                                    </datePicker>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jP-b1-97W">
-                                        <rect key="frame" x="289" y="8" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" name="mainBlueColor"/>
-                                        <state key="normal" title="X"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <integer key="value" value="15"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebA-Ua-9CR">
-                                        <rect key="frame" x="8" y="196" width="46" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <state key="normal" title="移除"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNd-Ab-nx2">
-                                        <rect key="frame" x="273" y="195" width="46" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                        <state key="normal" title="确定"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ztf-FS-CYf">
+                                        <rect key="frame" x="68.5" y="56" width="200" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="FIS-CE-ieC"/>
+                                            <constraint firstAttribute="width" constant="200" id="bfO-eq-leG"/>
+                                        </constraints>
+                                        <state key="normal" title="闹钟"/>
+                                        <connections>
+                                            <action selector="animateReminderView:" destination="3ow-NZ-8Na" eventType="touchUpInside" id="P4k-ai-gW5"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="1iH-G7-YMv" firstAttribute="centerX" secondItem="eLC-oK-v5e" secondAttribute="centerX" id="FbU-5d-3p5"/>
-                                    <constraint firstItem="1iH-G7-YMv" firstAttribute="top" secondItem="wUV-DR-e2X" secondAttribute="top" constant="42" id="L4E-DE-N9F"/>
-                                    <constraint firstAttribute="width" constant="327" id="ge3-hH-udO"/>
-                                    <constraint firstAttribute="height" constant="234" id="wzt-zi-UXM"/>
+                                    <constraint firstItem="0Ki-jI-50R" firstAttribute="centerX" secondItem="1eI-Hf-cU7" secondAttribute="centerX" id="09U-h8-Jmr"/>
+                                    <constraint firstAttribute="width" constant="327" id="1Tc-x3-mqK"/>
+                                    <constraint firstItem="Ztf-FS-CYf" firstAttribute="centerX" secondItem="1eI-Hf-cU7" secondAttribute="centerX" constant="5" id="3zK-lx-nhq"/>
+                                    <constraint firstItem="0Ki-jI-50R" firstAttribute="trailing" secondItem="VHg-CH-g8R" secondAttribute="trailing" id="7kq-w9-cnJ"/>
+                                    <constraint firstItem="0Ki-jI-50R" firstAttribute="top" secondItem="VHg-CH-g8R" secondAttribute="bottom" id="KP9-KB-B7Z"/>
+                                    <constraint firstAttribute="bottom" secondItem="0Ki-jI-50R" secondAttribute="bottom" constant="31" id="Ske-IU-UN7"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ztf-FS-CYf" secondAttribute="bottom" constant="5" id="aEp-2b-djE"/>
+                                    <constraint firstAttribute="height" constant="91" id="iP6-TE-BB3"/>
                                 </constraints>
-                                <viewLayoutGuide key="safeArea" id="wUV-DR-e2X"/>
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="eLC-oK-v5e" firstAttribute="leading" secondItem="5iI-Nh-PDE" secondAttribute="leading" constant="43" id="fk4-GA-pfx"/>
-                            <constraint firstItem="eLC-oK-v5e" firstAttribute="centerX" secondItem="5iI-Nh-PDE" secondAttribute="centerX" id="hO2-b9-h8k"/>
-                            <constraint firstItem="eLC-oK-v5e" firstAttribute="top" secondItem="5iI-Nh-PDE" secondAttribute="top" constant="54" id="yeb-Lg-CSk"/>
+                            <constraint firstItem="eLC-oK-v5e" firstAttribute="centerX" secondItem="n6L-eC-99v" secondAttribute="centerX" id="66X-XU-WTo"/>
+                            <constraint firstItem="1eI-Hf-cU7" firstAttribute="top" secondItem="n6L-eC-99v" secondAttribute="top" constant="30" id="i2D-iJ-5k9"/>
+                            <constraint firstItem="1eI-Hf-cU7" firstAttribute="centerX" secondItem="n6L-eC-99v" secondAttribute="centerX" id="szb-1m-QCe"/>
+                            <constraint firstItem="eLC-oK-v5e" firstAttribute="top" secondItem="n6L-eC-99v" secondAttribute="top" constant="100" id="xrv-w4-POj"/>
                         </constraints>
                     </view>
                     <blurEffect style="prominent"/>

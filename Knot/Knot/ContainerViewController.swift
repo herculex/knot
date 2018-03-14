@@ -24,11 +24,10 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var reminder: UIDatePicker!
     @IBOutlet weak var addButtonTrail: NSLayoutConstraint!
     var todoTableViewController:ToDoTableViewController!
-    var effectBlurOfBlurReminderView:UIVisualEffect!
     var effectBlurOfBlurAddView:UIVisualEffect!
-    
-    @IBOutlet var blurReminderView: UIVisualEffectView!
 
+    @IBOutlet weak var reminderButton: UIButton!
+    @IBOutlet weak var reminderConstraint: NSLayoutConstraint!
     var sideViewIsShowing:Bool!
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,8 +41,8 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        effectBlurOfBlurReminderView = blurReminderView.effect
-        blurReminderView.effect = nil
+        reminderConstraint.constant -= view.bounds.height
+        reminderView.alpha = 0
         
         effectBlurOfBlurAddView = blurAddView.effect
         blurAddView.effect = nil
@@ -87,10 +86,16 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("got return but done display")
-//        print("select reminder:\(reminder.date)")
-//        todoTableViewController.addNewTodoAt(withTitle: addText.text!, at: reminder.date)
         
-        todoTableViewController.addNewTodo(withTitle: addText.text!)
+        let formatter = DateFormatter()
+        formatter.locale = Locale.init(identifier: "zh_CH")
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        
+        if let date = formatter.date(from: reminderButton.currentTitle!){
+            todoTableViewController.addNewTodoAt(withTitle: addText.text!, at: date)
+        }else{
+            todoTableViewController.addNewTodo(withTitle: addText.text!)
+        }
         addViewAnimateOut()
         
         return true
@@ -152,10 +157,66 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
             self.sideViewIsShowing = false
         })
     }
+    @IBAction func animateReminderView(_ sender: Any) {
+        
+        if reminderConstraint.constant < 0 {
+            //animateIn
+            animateReminderIn()
+            //
+ 
+            let formater = DateFormatter()
+            formater.locale = Locale.init(identifier: "zh_CH")
+            formater.dateFormat = "yyyy-MM-dd HH:mm"
+            
+            if let date = formater.date(from: reminderButton.currentTitle!){
+                reminder.setDate(date, animated: true)
+            }else{
+                reminder.setDate(Date(), animated: true)
+            }
+        }else{
+            //anmiateOut
+            animateReminderOut()
+        }
+    }
+    
+    func animateReminderIn(){
+        UIView.animate(withDuration: 0.3, animations: {
+            self.reminderView.alpha = 1
+            self.reminderConstraint.constant += self.view.bounds.height
+            self.view.layoutIfNeeded()
+        })
+    }
+    func animateReminderOut(){
+        UIView.animate(withDuration: 0.2, animations: {
+            self.reminderView.alpha = 0
+            self.reminderConstraint.constant -= self.view.bounds.height
+            self.view.layoutIfNeeded()
+        })
+    }
     
     @IBAction func dismissAddItemView(_ sender: Any) {
         addViewAnimateOut()
     }
+    
+    
+    @IBAction func confirmReminder(_ sender: UIButton) {
+        let date = reminder.date
+        let formatter = DateFormatter()
+        formatter.locale = Locale.init(identifier: "zh_CN")
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        
+        reminderButton.setTitle(formatter.string(from: date), for: UIControlState.normal)
+        
+        animateReminderOut()
+    }
+    
+    @IBAction func removeReminder(_ sender: UIButton) {
+        
+        reminderButton.setTitle("闹钟", for: .normal)
+        animateReminderOut()
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -166,11 +227,11 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
         self.view.addSubview(blurAddView)
         blurAddView.frame = self.view.frame
         
-        addText.transform = addText.transform.scaledBy(x: 1.2, y: 1.2)
+        addItemView.transform = addText.transform.scaledBy(x: 1.2, y: 1.2)
 
         UIView.animate(withDuration: 0.5) {
-            self.addText.alpha = 1
-            self.addText.transform = CGAffineTransform.identity
+            self.addItemView.alpha = 1
+            self.addItemView.transform = CGAffineTransform.identity
             self.blurAddView.effect = self.effectBlurOfBlurAddView
         }
         addText.becomeFirstResponder()
@@ -178,39 +239,20 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
     func addViewAnimateOut(){
         addText.text = nil
         addText.resignFirstResponder()
+        reminderButton.setTitle("闹钟", for: .normal)
         
         UIView.animate(withDuration: 0.2, animations: {
-            self.addText.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
-            self.addText.alpha = 0
+            if self.reminderView.alpha == 1{
+                self.reminderView.alpha = 0
+                self.reminderConstraint.constant -= self.view.bounds.height
+            }
+            self.addItemView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.addItemView.alpha = 0
             self.blurAddView.effect = nil
         }) { (sucess) in
             self.blurAddView.removeFromSuperview()
         }
     }
     
-    func animateIn() {
-        self.view.addSubview(blurReminderView)
-        blurReminderView.frame = self.view.frame
-        
-        reminderView.transform = reminderView.transform.scaledBy(x: 1.2, y: 1.2)
-        
-        UIView.animate(withDuration: 0.5) {
-            self.reminderView.alpha = 1
-            self.reminderView.transform = CGAffineTransform.identity
-            self.blurReminderView.effect = self.effectBlurOfBlurReminderView
-        }
-        reminder.date = Date()
-    }
-    
-    func animateOut() {
-        
-        UIView.animate(withDuration: 0.2, animations: {
-            self.reminderView.transform = CGAffineTransform.init(scaleX: 1.4, y: 1.4)
-            self.reminderView.alpha = 0
-            self.blurReminderView.effect = nil
-        }) { (sucess) in
-            self.blurReminderView.removeFromSuperview()
-        }
-    }
     
 }
