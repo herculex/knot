@@ -84,9 +84,7 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
         addViewAnimateIn()
     }
 
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("got return but done display")
-        
+    func saveTodoItem() {
         let formatter = DateFormatter()
         formatter.locale = Locale.init(identifier: "zh_CH")
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
@@ -96,6 +94,11 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
         }else{
             todoTableViewController.addNewTodo(withTitle: addText.text!)
         }
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("got return but done display")
+        
+        saveTodoItem()
         addViewAnimateOut()
         
         return true
@@ -195,10 +198,12 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
     }
     
     @IBAction func dismissAddItemView(_ sender: Any) {
+        saveTodoItem()
         addViewAnimateOut()
     }
     
     
+
     @IBAction func confirmReminder(_ sender: UIButton) {
         let date = reminder.date
         let formatter = DateFormatter()

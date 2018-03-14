@@ -234,7 +234,7 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         if todoItem.hasReminder {
             let formatter = DateFormatter()
             formatter.locale = Locale.init(identifier: "zh_CH")
-            formatter.dateFormat = "yyyy-hh-mm HH:mm"
+            formatter.dateFormat = "yyyy-MM-dd HH:mm"
             cell.todoReminder.text = formatter.string(from: todoItem.remindAt)
         }else{
             cell.todoReminder.text = nil

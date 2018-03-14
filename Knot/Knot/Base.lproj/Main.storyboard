@@ -455,23 +455,8 @@
                                 <viewLayoutGuide key="safeArea" id="wUV-DR-e2X"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1eI-Hf-cU7">
-                                <rect key="frame" x="21" y="30" width="327" height="91"/>
+                                <rect key="frame" x="21" y="60" width="327" height="91"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VHg-CH-g8R">
-                                        <rect key="frame" x="299" y="0.0" width="20" height="20"/>
-                                        <color key="backgroundColor" name="mainBlueColor"/>
-                                        <state key="normal" title="X">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="dismissAddItemView:" destination="3ow-NZ-8Na" eventType="touchUpInside" id="rZK-GC-7OY"/>
-                                        </connections>
-                                    </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="todo Item Title" textAlignment="natural" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="0Ki-jI-50R">
                                         <rect key="frame" x="8" y="20" width="311" height="40"/>
                                         <constraints>
@@ -499,20 +484,22 @@
                                     <constraint firstItem="0Ki-jI-50R" firstAttribute="centerX" secondItem="1eI-Hf-cU7" secondAttribute="centerX" id="09U-h8-Jmr"/>
                                     <constraint firstAttribute="width" constant="327" id="1Tc-x3-mqK"/>
                                     <constraint firstItem="Ztf-FS-CYf" firstAttribute="centerX" secondItem="1eI-Hf-cU7" secondAttribute="centerX" constant="5" id="3zK-lx-nhq"/>
-                                    <constraint firstItem="0Ki-jI-50R" firstAttribute="trailing" secondItem="VHg-CH-g8R" secondAttribute="trailing" id="7kq-w9-cnJ"/>
-                                    <constraint firstItem="0Ki-jI-50R" firstAttribute="top" secondItem="VHg-CH-g8R" secondAttribute="bottom" id="KP9-KB-B7Z"/>
                                     <constraint firstAttribute="bottom" secondItem="0Ki-jI-50R" secondAttribute="bottom" constant="31" id="Ske-IU-UN7"/>
                                     <constraint firstAttribute="bottom" secondItem="Ztf-FS-CYf" secondAttribute="bottom" constant="5" id="aEp-2b-djE"/>
                                     <constraint firstAttribute="height" constant="91" id="iP6-TE-BB3"/>
                                 </constraints>
                             </view>
                         </subviews>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="eLC-oK-v5e" firstAttribute="centerX" secondItem="n6L-eC-99v" secondAttribute="centerX" id="66X-XU-WTo"/>
-                            <constraint firstItem="1eI-Hf-cU7" firstAttribute="top" secondItem="n6L-eC-99v" secondAttribute="top" constant="30" id="i2D-iJ-5k9"/>
+                            <constraint firstItem="1eI-Hf-cU7" firstAttribute="top" secondItem="n6L-eC-99v" secondAttribute="top" constant="60" id="i2D-iJ-5k9"/>
                             <constraint firstItem="1eI-Hf-cU7" firstAttribute="centerX" secondItem="n6L-eC-99v" secondAttribute="centerX" id="szb-1m-QCe"/>
                             <constraint firstItem="eLC-oK-v5e" firstAttribute="top" secondItem="n6L-eC-99v" secondAttribute="top" constant="100" id="xrv-w4-POj"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="qOL-GQ-mTQ" appends="YES" id="3TH-BD-hw0"/>
+                        </connections>
                     </view>
                     <blurEffect style="prominent"/>
                 </visualEffectView>
@@ -522,6 +509,11 @@
                         <action selector="swipeSideView:" destination="3ow-NZ-8Na" id="TFa-aR-6HJ"/>
                     </connections>
                 </screenEdgePanGestureRecognizer>
+                <tapGestureRecognizer id="qOL-GQ-mTQ">
+                    <connections>
+                        <action selector="dismissAddItemView:" destination="3ow-NZ-8Na" id="QRm-HO-2jb"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1879.7101449275365" y="-215.21739130434784"/>
         </scene>
