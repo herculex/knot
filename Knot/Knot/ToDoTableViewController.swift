@@ -231,6 +231,15 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         
         let todoItem = todoItems[indexPath.row]
         cell.todoLabel.text = todoItem.title
+        if todoItem.hasReminder {
+            let formatter = DateFormatter()
+            formatter.locale = Locale.init(identifier: "zh_CH")
+            formatter.dateFormat = "yyyy-hh-mm HH:mm"
+            cell.todoReminder.text = formatter.string(from: todoItem.remindAt)
+        }else{
+            cell.todoReminder.text = nil
+        }
+
 //        cell.layer.cornerRadius = cell.frame.size.height / 4
 //        cell.layer.cornerRadius = cell.bounds.height / 4
         

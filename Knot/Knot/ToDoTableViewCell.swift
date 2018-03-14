@@ -17,6 +17,7 @@ protocol TodoCellDelegate {
 class ToDoTableViewCell: UITableViewCell {
 
     
+    @IBOutlet weak var todoReminder: UILabel!
     @IBOutlet weak var todoLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
