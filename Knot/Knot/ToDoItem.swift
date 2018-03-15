@@ -40,6 +40,7 @@ struct ToDoItem : Codable {
             NotificationManager.cancel(itemIdentifier.uuidString)
         }
     }
+        
     mutating func cancelReminder()
     {
         self.hasReminder = false

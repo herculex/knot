@@ -24,6 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
             }
         }
         
+        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { (list) in
+            print("pending count:\(list.count)") })
+        
+        let badgeCount = UIApplication.shared.applicationIconBadgeNumber
+        print("badgeCount:\(badgeCount)")
        
         //define actions
         let completeAction = UNNotificationAction(identifier: "completed", title: "已完成", options: [])

@@ -10,8 +10,13 @@ import UIKit
 import MultipeerConnectivity
 import UserNotifications
 
+protocol ToDoTableViewControllerDelegate {
+    func didRequestAddUI()
+    func didRequestEditUI(_ todoItem:ToDoItem,_ indexPath:IndexPath)
+}
 class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowserViewControllerDelegate {
 
+    var delegate:ToDoTableViewControllerDelegate!
     var peerID:MCPeerID!
     var mcSession:MCSession!
     var mcAdvertiserAssistant:MCAdvertiserAssistant!
@@ -27,26 +32,9 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
     @IBOutlet var visualEffect: UIVisualEffectView!
     @IBAction func addItem(_ sender: Any) {
         
-        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { (list) in
-            print("pending count:\(list.count)") })
-        
-        let badgeCount = UIApplication.shared.applicationIconBadgeNumber
-        print("badgeCount:\(badgeCount)")
-        
-        if let superView = self.view.superview{
-            if effectActivited {
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.visualEffect.removeFromSuperview()
-                }, completion: { (sucess) in
-                    self.effectActivited = false
-                })
-            }else{
-                superView.addSubview(visualEffect)
-                visualEffect.frame = superView.frame
-                effectActivited = true
-            }
+        if let delegate = delegate {
+            delegate.didRequestAddUI()
         }
-    
     }
     
     @IBOutlet var progressBar: UIProgressView!
@@ -166,6 +154,22 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         self.tableView.endUpdates()
     }
     
+    func editTodo(_ todoItem:ToDoItem,_ indexPath:IndexPath){
+        var item = todoItem
+        item.createdAt = Date()
+        item.saveItem()
+        todoItems[indexPath.row] = item
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+        moveTodoItem(at: indexPath, to: IndexPath(row: 0, section: 0))
+    }
+    
+    func deleteTodo(_ indexPath:IndexPath) {
+        
+        self.todoItems[indexPath.row].deleteItem()
+        self.todoItems.remove(at: indexPath.row)
+        self.tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
     func addNewTodo() {
         let addAlert = UIAlertController(title: "New Todo", message: "Enter a title", preferredStyle: .alert)
         
@@ -282,6 +286,11 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
                     cell.transform = CGAffineTransform.identity
                 }, completion:nil)
             })
+        }
+        if let delegate = delegate {
+            
+            let todoItem = todoItems[indexPath.row]            
+            delegate.didRequestEditUI(todoItem, indexPath)
         }
     }
     

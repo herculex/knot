@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContainerViewController: UIViewController,UITextFieldDelegate {
+class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableViewControllerDelegate {
 
     @IBOutlet var blurAddView: UIVisualEffectView!
     @IBOutlet var edgePanGesture: UIScreenEdgePanGestureRecognizer!
@@ -75,7 +75,8 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "todoVC" {
             todoTableViewController = (segue.destination as! UINavigationController).childViewControllers.first as! ToDoTableViewController
-            todoTableViewController.connectionButtonReference = connectionButton 
+            todoTableViewController.connectionButtonReference = connectionButton
+            todoTableViewController.delegate = self
         }
     }
 
@@ -89,10 +90,32 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
         formatter.locale = Locale.init(identifier: "zh_CH")
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
         
-        if let date = formatter.date(from: reminderButton.currentTitle!){
-            todoTableViewController.addNewTodoAt(withTitle: addText.text!, at: date)
+        if var currentItem = selectedTodoItem,let currentIndex = selectedIndexPath{
+            
+            if addText.text!.count == 0 {
+                todoTableViewController.deleteTodo(currentIndex)
+            }else{
+                print("editing \(currentItem.title)")
+                currentItem.title = addText.text!
+                
+                if let date = formatter.date(from: reminderButton.currentTitle!){
+                    currentItem.hasReminder = true
+                    currentItem.remindAt = date
+                }
+                
+                todoTableViewController.editTodo(currentItem, currentIndex)
+            }
+            
+            selectedTodoItem = nil
+            selectedIndexPath = nil
+            
         }else{
-            todoTableViewController.addNewTodo(withTitle: addText.text!)
+            print("adding \(addText.text!)")
+            if let date = formatter.date(from: reminderButton.currentTitle!){
+                todoTableViewController.addNewTodoAt(withTitle: addText.text!, at: date)
+            }else{
+                todoTableViewController.addNewTodo(withTitle: addText.text!)
+            }
         }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -259,5 +282,26 @@ class ContainerViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
+    // MARK: - ToDoTableViewControllerDelegate
+
+    var selectedTodoItem:ToDoItem!
+    var selectedIndexPath:IndexPath!
+    func didRequestAddUI() {
+        addViewAnimateIn()
+    }
+    
+    func didRequestEditUI(_ todoItem: ToDoItem, _ indexPath:IndexPath) {
+        addViewAnimateIn()
+        addText.text = todoItem.title
+        if todoItem.hasReminder {
+            let formatter = DateFormatter()
+            formatter.locale = Locale.init(identifier: "zh_CH")
+            formatter.dateFormat = "yyyy-MM-dd HH:mm"
+            reminderButton.setTitle(formatter.string(from: todoItem.remindAt), for: .normal)
+        }
+        selectedTodoItem = todoItem
+        selectedIndexPath = indexPath
+        
+    }
     
 }
