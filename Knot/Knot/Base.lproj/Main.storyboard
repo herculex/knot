@@ -406,7 +406,6 @@
                         <outlet property="edgePanGesture" destination="Erh-vh-R07" id="vt3-6q-IyI"/>
                         <outlet property="reminder" destination="1iH-G7-YMv" id="vhL-ug-Hl7"/>
                         <outlet property="reminderButton" destination="Ztf-FS-CYf" id="8Fd-TS-oJy"/>
-                        <outlet property="reminderConstraint" destination="xrv-w4-POj" id="QtG-Gp-SSi"/>
                         <outlet property="reminderView" destination="eLC-oK-v5e" id="rXC-P9-QME"/>
                         <outlet property="sideView" destination="l9D-1p-NOi" id="6JT-HS-uhv"/>
                         <outlet property="sideViewConstraint" destination="eCK-KC-DVt" id="FhL-4V-go2"/>
@@ -421,7 +420,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eLC-oK-v5e">
-                                <rect key="frame" x="21" y="120" width="327" height="234"/>
+                                <rect key="frame" x="5.3333333333333428" y="120" width="359" height="234"/>
                                 <subviews>
                                     <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="1iH-G7-YMv">
                                         <rect key="frame" x="3" y="31" width="320" height="160"/>
@@ -439,7 +438,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNd-Ab-nx2">
-                                        <rect key="frame" x="273" y="195" width="46" height="30"/>
+                                        <rect key="frame" x="305" y="195" width="46" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <state key="normal" title="确定"/>
                                         <connections>
@@ -449,8 +448,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="234" id="elP-gl-1eK"/>
-                                    <constraint firstAttribute="width" constant="327" id="zfJ-27-CLJ"/>
+                                    <constraint firstAttribute="height" constant="234" id="9T2-Vs-x7W"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="wUV-DR-e2X"/>
                             </view>
@@ -491,11 +489,12 @@
                         </subviews>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="eLC-oK-v5e" firstAttribute="centerX" secondItem="n6L-eC-99v" secondAttribute="centerX" id="66X-XU-WTo"/>
+                            <constraint firstItem="eLC-oK-v5e" firstAttribute="width" secondItem="1eI-Hf-cU7" secondAttribute="width" id="Ngl-7o-zRd"/>
                             <constraint firstItem="1eI-Hf-cU7" firstAttribute="leading" secondItem="n6L-eC-99v" secondAttribute="leading" constant="5" id="Url-JP-XQR"/>
+                            <constraint firstItem="eLC-oK-v5e" firstAttribute="centerX" secondItem="1eI-Hf-cU7" secondAttribute="centerX" id="ccu-AZ-ang"/>
+                            <constraint firstItem="eLC-oK-v5e" firstAttribute="top" secondItem="n6L-eC-99v" secondAttribute="top" constant="120" id="cpB-mB-qp5"/>
                             <constraint firstItem="1eI-Hf-cU7" firstAttribute="top" secondItem="n6L-eC-99v" secondAttribute="top" constant="60" id="i2D-iJ-5k9"/>
                             <constraint firstItem="1eI-Hf-cU7" firstAttribute="centerX" secondItem="n6L-eC-99v" secondAttribute="centerX" id="szb-1m-QCe"/>
-                            <constraint firstItem="eLC-oK-v5e" firstAttribute="top" secondItem="n6L-eC-99v" secondAttribute="top" constant="120" id="xrv-w4-POj"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="qOL-GQ-mTQ" appends="YES" id="3TH-BD-hw0"/>
