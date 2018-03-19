@@ -17,6 +17,7 @@ class DemoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        topContraint.constant = addItemPanel.frame.size.width - 50
         // Do any additional setup after loading the view.
     }
 
@@ -27,6 +28,11 @@ class DemoViewController: UIViewController {
     
     @IBAction func swipeUp(_ sender: UIPanGestureRecognizer) {
         print("swipeUp")
+        if sender.state == .began || sender.state == .changed {
+            let x = sender.translation(in: self.view).x
+            self.topContraint.constant += x
+            
+        }
     }
     @IBAction func tapClose(_ sender: UITapGestureRecognizer) {
         print("tap press")
