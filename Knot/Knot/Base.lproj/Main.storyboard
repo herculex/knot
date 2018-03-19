@@ -282,6 +282,82 @@
             </objects>
             <point key="canvasLocation" x="-49" y="-1283"/>
         </scene>
+        <!--Demo View Controller-->
+        <scene sceneID="vUG-rs-hew">
+            <objects>
+                <viewController id="8k4-us-d1i" customClass="DemoViewController" customModule="Knot" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tdh-0U-ZRu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qdi-59-yPI">
+                                <rect key="frame" x="20" y="20" width="374" height="716"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Todo here input" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8JB-55-6Pc">
+                                        <rect key="frame" x="14" y="0.0" width="346" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="V95-nt-3CG">
+                                        <rect key="frame" x="0.0" y="38" width="374" height="162"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="543141594.49327004">
+                                            <!--2018-03-19 08:39:54 +0000-->
+                                        </date>
+                                    </datePicker>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="716" id="73L-xb-7Q4"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="MLM-Mr-Sf9" appends="YES" id="ZGz-hZ-iGN"/>
+                                    <outletCollection property="gestureRecognizers" destination="ZRo-o7-DJ3" appends="YES" id="lTo-QW-jER"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qdi-59-yPI" firstAttribute="top" secondItem="jYO-VW-vdQ" secondAttribute="top" id="9eC-1M-lJd"/>
+                            <constraint firstItem="qdi-59-yPI" firstAttribute="leading" secondItem="jYO-VW-vdQ" secondAttribute="leading" constant="20" id="oY9-1B-UsG"/>
+                            <constraint firstItem="qdi-59-yPI" firstAttribute="centerX" secondItem="tdh-0U-ZRu" secondAttribute="centerX" id="r3S-ni-rdc"/>
+                            <constraint firstItem="jYO-VW-vdQ" firstAttribute="trailing" secondItem="qdi-59-yPI" secondAttribute="trailing" constant="20" id="vLv-TZ-0Ie"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jYO-VW-vdQ"/>
+                    </view>
+                    <connections>
+                        <outlet property="addItemPanel" destination="qdi-59-yPI" id="8Ml-QW-b9K"/>
+                        <outlet property="reminder" destination="V95-nt-3CG" id="DCU-Fy-fWL"/>
+                        <outlet property="textfiled" destination="8JB-55-6Pc" id="6wg-f3-Onz"/>
+                        <outlet property="topContraint" destination="9eC-1M-lJd" id="Egu-9n-81Y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oom-Q8-t68" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" id="jBS-p0-KXO">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Hhd-37-ShS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <blurEffect style="light"/>
+                </visualEffectView>
+                <tapGestureRecognizer id="MLM-Mr-Sf9">
+                    <connections>
+                        <action selector="tapClose:" destination="8k4-us-d1i" id="a5v-2v-og6"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="ZRo-o7-DJ3">
+                    <connections>
+                        <action selector="swipeUp:" destination="8k4-us-d1i" id="Q6v-AY-tz2"/>
+                    </connections>
+                </panGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-2881.1594202898555" y="72.554347826086968"/>
+        </scene>
         <!--Container View Controller-->
         <scene sceneID="Yly-Sd-cmG">
             <objects>
@@ -375,6 +451,14 @@
                                     <constraint firstItem="F6g-RC-SvI" firstAttribute="centerX" secondItem="l9D-1p-NOi" secondAttribute="centerX" id="xEA-2L-7Xf"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXC-gq-asD">
+                                <rect key="frame" x="20" y="690" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Demo"/>
+                                <connections>
+                                    <segue destination="8k4-us-d1i" kind="show" id="rRo-pC-ptS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -422,13 +506,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eLC-oK-v5e">
                                 <rect key="frame" x="5.3333333333333428" y="120" width="359" height="234"/>
                                 <subviews>
-                                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="1iH-G7-YMv">
-                                        <rect key="frame" x="3" y="31" width="320" height="160"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                        <date key="date" timeIntervalSinceReferenceDate="541761492.21603894">
-                                            <!--2018-03-03 09:18:12 +0000-->
-                                        </date>
-                                    </datePicker>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebA-Ua-9CR">
                                         <rect key="frame" x="8" y="196" width="46" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -445,6 +522,13 @@
                                             <action selector="confirmReminder:" destination="3ow-NZ-8Na" eventType="touchUpInside" id="zJD-5U-Wjz"/>
                                         </connections>
                                     </button>
+                                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="1iH-G7-YMv">
+                                        <rect key="frame" x="19" y="37" width="320" height="160"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="541761492.21603894">
+                                            <!--2018-03-03 09:18:12 +0000-->
+                                        </date>
+                                    </datePicker>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>

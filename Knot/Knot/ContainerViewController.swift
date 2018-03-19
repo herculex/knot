@@ -41,8 +41,8 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        reminderConstraint.constant -= view.bounds.height
-        reminderView.alpha = 0
+//        reminderConstraint.constant -= view.bounds.height
+//        reminderView.alpha = 0
         
         effectBlurOfBlurAddView = blurAddView.effect
         blurAddView.effect = nil
