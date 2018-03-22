@@ -14,10 +14,12 @@ class DemoViewController: UIViewController {
     @IBOutlet weak var textfiled: UITextField!
     @IBOutlet weak var addItemPanel: UIView!
     @IBOutlet weak var topContraint: NSLayoutConstraint!
+    var lastY:CGFloat!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        topContraint.constant = addItemPanel.frame.size.width - 50
+        topContraint.constant = view.frame.size.height - 100
+        lastY = topContraint.constant
         // Do any additional setup after loading the view.
     }
 
@@ -25,12 +27,29 @@ class DemoViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     @IBAction func swipeUp(_ sender: UIPanGestureRecognizer) {
-        print("swipeUp")
+        //        print("swipeUp,in Y axis")
+        if sender.state == .ended || sender.state == .cancelled{
+            lastY = self.topContraint.constant
+        }
         if sender.state == .began || sender.state == .changed {
-            let x = sender.translation(in: self.view).x
-            self.topContraint.constant += x
+            let y = sender.translation(in: self.addItemPanel).y
+            
+            print("y in addItempanel=\(y)")
+            
+            var dy = lastY + y
+            if dy <= 50{
+                dy = 50
+            }else if dy > view.frame.size.height - 100 {
+                dy = view.frame.size.height - 100
+            }
+            UIView.animate(withDuration: 0.2, animations: {
+                self.topContraint.constant = dy
+                self.view.layoutIfNeeded()
+                
+            }, completion: { (sucess) in
+                print("swipe to up completed.")
+            })
             
         }
     }
