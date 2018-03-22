@@ -15,11 +15,16 @@ class DemoViewController: UIViewController {
     @IBOutlet weak var addItemPanel: UIView!
     @IBOutlet weak var topContraint: NSLayoutConstraint!
     var lastY:CGFloat!
+    var minTop:CGFloat!
+    var maxTop:CGFloat!
+    let startOffset = CGFloat(integerLiteral: 60)
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        topContraint.constant = view.frame.size.height - 100
+        topContraint.constant = view.frame.size.height - startOffset
         lastY = topContraint.constant
+        minTop = CGFloat(integerLiteral: 50)
+        maxTop = view.frame.size.height - startOffset
         // Do any additional setup after loading the view.
     }
 
@@ -31,6 +36,25 @@ class DemoViewController: UIViewController {
         //        print("swipeUp,in Y axis")
         if sender.state == .ended || sender.state == .cancelled{
             lastY = self.topContraint.constant
+            if lastY < maxTop - 200{
+                //show all
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.topContraint.constant = self.minTop
+                    self.view.layoutIfNeeded()
+                }, completion: { (sucess) in
+                    print("show all done.")
+                    self.lastY = self.topContraint.constant
+                })
+            }else {
+                //close up
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.topContraint.constant = self.maxTop
+                    self.view.layoutIfNeeded()
+                }, completion: { (sucess) in
+                    print("close up done.")
+                    self.lastY = self.topContraint.constant
+                })
+            }
         }
         if sender.state == .began || sender.state == .changed {
             let y = sender.translation(in: self.addItemPanel).y
@@ -38,10 +62,10 @@ class DemoViewController: UIViewController {
             print("y in addItempanel=\(y)")
             
             var dy = lastY + y
-            if dy <= 50{
-                dy = 50
-            }else if dy > view.frame.size.height - 100 {
-                dy = view.frame.size.height - 100
+            if dy <= minTop{
+                dy = minTop
+            }else if dy > maxTop {
+                dy = maxTop
             }
             UIView.animate(withDuration: 0.2, animations: {
                 self.topContraint.constant = dy
@@ -55,6 +79,15 @@ class DemoViewController: UIViewController {
     }
     @IBAction func tapClose(_ sender: UITapGestureRecognizer) {
         print("tap press")
+        if lastY < maxTop {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.topContraint.constant = self.maxTop
+                self.view.layoutIfNeeded()
+            }, completion: { (sucess) in
+                print("close up done.")
+                self.lastY = self.topContraint.constant
+            })
+        }
     }
     
     /*
