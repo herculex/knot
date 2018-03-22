@@ -14,6 +14,9 @@ class DemoViewController: UIViewController {
     @IBOutlet weak var textfiled: UITextField!
     @IBOutlet weak var addItemPanel: UIView!
     @IBOutlet weak var topContraint: NSLayoutConstraint!
+    var effection:UIVisualEffect!
+    
+    @IBOutlet weak var effectView: UIVisualEffectView!
     var lastY:CGFloat!
     var minTop:CGFloat!
     var maxTop:CGFloat!
@@ -21,6 +24,10 @@ class DemoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        effection = effectView.effect
+//        effectView.effect = nil
+        effectView.alpha = 0
+        
         topContraint.constant = view.frame.size.height - startOffset
         lastY = topContraint.constant
         minTop = CGFloat(integerLiteral: 50)
@@ -36,11 +43,21 @@ class DemoViewController: UIViewController {
         //        print("swipeUp,in Y axis")
         if sender.state == .ended || sender.state == .cancelled{
             lastY = self.topContraint.constant
+            
+            if lastY == maxTop || lastY == minTop {
+                return
+            }
+            
             if lastY < maxTop - 200{
                 //show all
                 UIView.animate(withDuration: 0.2, animations: {
                     self.topContraint.constant = self.minTop
+                    
+//                    self.effectView.effect = self.effection
+                    self.effectView.alpha = 1
+                    
                     self.view.layoutIfNeeded()
+                    
                 }, completion: { (sucess) in
                     print("show all done.")
                     self.lastY = self.topContraint.constant
@@ -49,6 +66,10 @@ class DemoViewController: UIViewController {
                 //close up
                 UIView.animate(withDuration: 0.2, animations: {
                     self.topContraint.constant = self.maxTop
+                    
+//                    self.effectView.effect = nil
+                    self.effectView.alpha = 0
+                    
                     self.view.layoutIfNeeded()
                 }, completion: { (sucess) in
                     print("close up done.")
@@ -61,14 +82,27 @@ class DemoViewController: UIViewController {
             
             print("y in addItempanel=\(y)")
             
+            if y > 0 && lastY == maxTop {
+                return
+            }else if y < 0 && lastY == minTop {
+                return
+            }
+            
             var dy = lastY + y
+            var al = 1 - (dy / maxTop)
             if dy <= minTop{
                 dy = minTop
+                al = 0
             }else if dy > maxTop {
                 dy = maxTop
+                al = 1
             }
+            
             UIView.animate(withDuration: 0.2, animations: {
                 self.topContraint.constant = dy
+//                self.effectView.effect = self.effection
+                self.effectView.alpha = al
+                
                 self.view.layoutIfNeeded()
                 
             }, completion: { (sucess) in
@@ -82,11 +116,17 @@ class DemoViewController: UIViewController {
         if lastY < maxTop {
             UIView.animate(withDuration: 0.2, animations: {
                 self.topContraint.constant = self.maxTop
+                
+//                self.effectView.effect = nil
+                self.effectView.alpha = 0
+                
                 self.view.layoutIfNeeded()
             }, completion: { (sucess) in
                 print("close up done.")
                 self.lastY = self.topContraint.constant
             })
+        }else{
+            print("already closed")
         }
     }
     
