@@ -82,26 +82,28 @@ class DemoViewController: UIViewController {
             
             print("y in addItempanel=\(y)")
             
-            if y > 0 && lastY == maxTop {
+            if y >= 0 && lastY == maxTop {
                 return
-            }else if y < 0 && lastY == minTop {
+            }else if y <= 0 && lastY == minTop {
                 return
             }
             
             var dy = lastY + y
-            var al = 1 - (dy / maxTop)
+            var alpha = 1 - (dy / maxTop)
+            print("alpha:\(alpha)")
+            
             if dy <= minTop{
                 dy = minTop
-                al = 0
+                alpha = 1
             }else if dy > maxTop {
                 dy = maxTop
-                al = 1
+                alpha = 0
             }
             
             UIView.animate(withDuration: 0.2, animations: {
                 self.topContraint.constant = dy
 //                self.effectView.effect = self.effection
-                self.effectView.alpha = al
+                self.effectView.alpha = alpha
                 
                 self.view.layoutIfNeeded()
                 
