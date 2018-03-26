@@ -29,7 +29,7 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
     var effectBlurOfBlurAddView:UIVisualEffect!
 
     @IBOutlet weak var reminderButton: UIButton!
-    @IBOutlet weak var reminderConstraint: NSLayoutConstraint!
+    
     var sideViewIsShowing:Bool!
     var lastY:CGFloat!
     var minTop:CGFloat!
@@ -56,6 +56,7 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
                     
                 }, completion: { (sucess) in
                     print("show all done.")
+                    self.addText.becomeFirstResponder()
                     self.lastY = self.topContraint.constant
                 })
             }else {
@@ -77,6 +78,10 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
             let y = sender.translation(in: self.addItemPanelView).y
             
             print("y in addItempanel=\(y)")
+            
+            if self.addText.isFirstResponder{
+                self.addText.resignFirstResponder()
+            }
             
             if y >= 0 && lastY == maxTop {
                 return
