@@ -10,6 +10,8 @@ import UIKit
 
 class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableViewControllerDelegate {
 
+    @IBOutlet weak var topContraint: NSLayoutConstraint!
+    @IBOutlet weak var addItemPanelView: UIView!
     @IBOutlet var blurAddView: UIVisualEffectView!
     @IBOutlet var edgePanGesture: UIScreenEdgePanGestureRecognizer!
     @IBOutlet weak var blurSideView: UIVisualEffectView!
@@ -29,7 +31,84 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
     @IBOutlet weak var reminderButton: UIButton!
     @IBOutlet weak var reminderConstraint: NSLayoutConstraint!
     var sideViewIsShowing:Bool!
+    var lastY:CGFloat!
+    var minTop:CGFloat!
+    var maxTop:CGFloat!
+    let startOffset = CGFloat(integerLiteral: 60)
     
+    @IBAction func swipeUp(_ sender: UIPanGestureRecognizer) {
+        if sender.state == .ended || sender.state == .cancelled{
+            lastY = self.topContraint.constant
+            
+            if lastY == maxTop || lastY == minTop {
+                return
+            }
+            
+            if lastY < maxTop - 200{
+                //show all
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.topContraint.constant = self.minTop
+                    
+                    //                    self.effectView.effect = self.effection
+                    self.blurAddView.alpha = 1
+                    
+                    self.view.layoutIfNeeded()
+                    
+                }, completion: { (sucess) in
+                    print("show all done.")
+                    self.lastY = self.topContraint.constant
+                })
+            }else {
+                //close up
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.topContraint.constant = self.maxTop
+                    
+                    //                    self.effectView.effect = nil
+                    self.blurAddView.alpha = 0
+                    
+                    self.view.layoutIfNeeded()
+                }, completion: { (sucess) in
+                    print("close up done.")
+                    self.lastY = self.topContraint.constant
+                })
+            }
+        }
+        if sender.state == .began || sender.state == .changed {
+            let y = sender.translation(in: self.addItemPanelView).y
+            
+            print("y in addItempanel=\(y)")
+            
+            if y >= 0 && lastY == maxTop {
+                return
+            }else if y <= 0 && lastY == minTop {
+                return
+            }
+            
+            var dy = lastY + y
+            var alpha = 1 - (dy / maxTop)
+            print("alpha:\(alpha)")
+            
+            if dy <= minTop{
+                dy = minTop
+                alpha = 1
+            }else if dy > maxTop {
+                dy = maxTop
+                alpha = 0
+            }
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                self.topContraint.constant = dy
+                //                self.effectView.effect = self.effection
+                self.blurAddView.alpha = alpha
+                
+                self.view.layoutIfNeeded()
+                
+            }, completion: { (sucess) in
+                print("swipe to up completed.")
+            })
+            
+        }
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -40,13 +119,23 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.view.addSubview(blurAddView)
+        blurAddView.frame = view.frame
+        blurAddView.alpha = 0
+        
+        topContraint.constant = view.frame.size.height - startOffset
+        
+        lastY = topContraint.constant
+        minTop = CGFloat(integerLiteral: 50)
+        maxTop = view.frame.size.height - startOffset
         
 //        reminderConstraint.constant -= view.bounds.height
 //        reminderView.alpha = 0
         
         effectBlurOfBlurAddView = blurAddView.effect
-        blurAddView.effect = nil
-               
+//        blurAddView.effect = nil
+//        blurAddView.alpha = 0
+        
         addText.returnKeyType = .done
         addText.delegate = self
         
@@ -260,7 +349,8 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
         UIView.animate(withDuration: 0.5) {
             self.addItemView.alpha = 1
             self.addItemView.transform = CGAffineTransform.identity
-            self.blurAddView.effect = self.effectBlurOfBlurAddView
+//            self.blurAddView.effect = self.effectBlurOfBlurAddView
+            self.blurAddView.alpha = 1
         }
         addText.becomeFirstResponder()
     }
@@ -272,11 +362,11 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
         UIView.animate(withDuration: 0.2, animations: {
             if self.reminderView.alpha == 1{
                 self.reminderView.alpha = 0
-                self.reminderConstraint.constant -= self.view.bounds.height
+//                self.reminderConstraint.constant -= self.view.bounds.height
             }
             self.addItemView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
             self.addItemView.alpha = 0
-            self.blurAddView.effect = nil
+//            self.blurAddView.effect = nil
         }) { (sucess) in
             self.blurAddView.removeFromSuperview()
         }
