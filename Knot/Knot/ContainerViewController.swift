@@ -171,7 +171,7 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
 
     @IBOutlet var reminderView: UIView!
     @IBAction func addNewTodoItem(_ sender: UIButton) {
-        addViewAnimateIn()
+//        addViewAnimateIn()
     }
 
     func saveTodoItem() {
@@ -274,7 +274,7 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
     }
     @IBAction func animateReminderView(_ sender: Any) {
         
-        if reminderConstraint.constant < 0 {
+        if reminderView.alpha == 0 {
             //animateIn
             animateReminderIn()
             //
@@ -297,14 +297,14 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
     func animateReminderIn(){
         UIView.animate(withDuration: 0.3, animations: {
             self.reminderView.alpha = 1
-            self.reminderConstraint.constant += self.view.bounds.height
+//            self.reminderConstraint.constant += self.view.bounds.height
             self.view.layoutIfNeeded()
         })
     }
     func animateReminderOut(){
         UIView.animate(withDuration: 0.2, animations: {
             self.reminderView.alpha = 0
-            self.reminderConstraint.constant -= self.view.bounds.height
+//            self.reminderConstraint.constant -= self.view.bounds.height
             self.view.layoutIfNeeded()
         })
     }
@@ -341,18 +341,22 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
     // MARK: - animate In & Out of Pop-up
     
     func addViewAnimateIn(){
-        self.view.addSubview(blurAddView)
-        blurAddView.frame = self.view.frame
+//        self.view.addSubview(blurAddView)
+//        blurAddView.frame = self.view.frame
         
-        addItemView.transform = addText.transform.scaledBy(x: 1.2, y: 1.2)
+//        addItemView.transform = addText.transform.scaledBy(x: 1.2, y: 1.2)
 
-        UIView.animate(withDuration: 0.5) {
-            self.addItemView.alpha = 1
-            self.addItemView.transform = CGAffineTransform.identity
-//            self.blurAddView.effect = self.effectBlurOfBlurAddView
+        UIView.animate(withDuration: 0.5, animations: {
+            //            self.addItemView.alpha = 1
+            //            self.addItemView.transform = CGAffineTransform.identity
+            //            self.blurAddView.effect = self.effectBlurOfBlurAddView
             self.blurAddView.alpha = 1
+            self.topContraint.constant = self.minTop
+            self.view.layoutIfNeeded()
+        }) { (sucess) in
+            self.addText.becomeFirstResponder()
         }
-        addText.becomeFirstResponder()
+        
     }
     func addViewAnimateOut(){
         addText.text = nil
@@ -360,15 +364,19 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
         reminderButton.setTitle("闹钟", for: .normal)
         
         UIView.animate(withDuration: 0.2, animations: {
-            if self.reminderView.alpha == 1{
-                self.reminderView.alpha = 0
+//            if self.reminderView.alpha == 1{
+//                self.reminderView.alpha = 0
 //                self.reminderConstraint.constant -= self.view.bounds.height
-            }
-            self.addItemView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
-            self.addItemView.alpha = 0
+//            }
+//            self.addItemView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+//            self.addItemView.alpha = 0
 //            self.blurAddView.effect = nil
+            self.blurAddView.alpha = 0
+            self.topContraint.constant = self.maxTop
+            self.view.layoutIfNeeded()
         }) { (sucess) in
-            self.blurAddView.removeFromSuperview()
+//            self.blurAddView.removeFromSuperview()
+            self.lastY = self.topContraint.constant
         }
     }
     

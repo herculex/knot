@@ -512,6 +512,7 @@
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="fY1-Zt-YBh" appends="YES" id="46j-W3-jDP"/>
+                                    <outletCollection property="gestureRecognizers" destination="EzX-Ja-mjW" appends="YES" id="zSc-wG-Bhu"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -563,16 +564,21 @@
                         <action selector="swipeSideView:" destination="3ow-NZ-8Na" id="TFa-aR-6HJ"/>
                     </connections>
                 </screenEdgePanGestureRecognizer>
-                <tapGestureRecognizer id="qOL-GQ-mTQ">
-                    <connections>
-                        <action selector="dismissAddItemView:" destination="3ow-NZ-8Na" id="QRm-HO-2jb"/>
-                    </connections>
-                </tapGestureRecognizer>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="fY1-Zt-YBh">
                     <connections>
                         <action selector="swipeUp:" destination="3ow-NZ-8Na" id="cxr-dj-e8h"/>
                     </connections>
                 </panGestureRecognizer>
+                <tapGestureRecognizer id="qOL-GQ-mTQ">
+                    <connections>
+                        <action selector="dismissAddItemView:" destination="3ow-NZ-8Na" id="QRm-HO-2jb"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="EzX-Ja-mjW">
+                    <connections>
+                        <action selector="dismissAddItemView:" destination="3ow-NZ-8Na" id="0mn-5j-w2G"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1879.7101449275365" y="-215.21739130434784"/>
         </scene>
