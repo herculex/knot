@@ -16,7 +16,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="NodeTableView" id="G8s-tT-1pQ" customClass="ToDoTableViewController" customModule="Knot" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="wvM-UL-UFU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="665"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="696"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <progressView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="6VB-aU-aAy">
@@ -286,7 +286,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aAX-vS-1ow">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="665"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="696"/>
                                 <connections>
                                     <segue destination="qK6-Nr-IPP" kind="embed" identifier="todoVC" id="0yB-Ht-vvN"/>
                                 </connections>
@@ -438,7 +438,7 @@
                             <constraint firstItem="OkT-op-Flb" firstAttribute="centerX" secondItem="ozJ-dO-20I" secondAttribute="centerX" id="MFu-2G-79S"/>
                             <constraint firstItem="l9D-1p-NOi" firstAttribute="leading" secondItem="aAX-vS-1ow" secondAttribute="leading" id="eCK-KC-DVt"/>
                             <constraint firstItem="Su5-1m-SR1" firstAttribute="trailing" secondItem="OkT-op-Flb" secondAttribute="trailing" id="heh-3M-ZgR"/>
-                            <constraint firstItem="Su5-1m-SR1" firstAttribute="bottom" secondItem="aAX-vS-1ow" secondAttribute="bottom" constant="71" id="mih-Ve-1Zi"/>
+                            <constraint firstItem="Su5-1m-SR1" firstAttribute="bottom" secondItem="aAX-vS-1ow" secondAttribute="bottom" constant="40" id="mih-Ve-1Zi"/>
                             <constraint firstItem="OkT-op-Flb" firstAttribute="top" secondItem="Su5-1m-SR1" secondAttribute="top" id="q5t-ua-MFH"/>
                             <constraint firstItem="l9D-1p-NOi" firstAttribute="top" secondItem="Su5-1m-SR1" secondAttribute="top" constant="100" id="rJh-pe-4hL"/>
                         </constraints>

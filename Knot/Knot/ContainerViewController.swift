@@ -34,92 +34,17 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
     var maxTop:CGFloat!
     let startOffset = CGFloat(integerLiteral: 60)
     
-    @IBAction func swipeUp(_ sender: UIPanGestureRecognizer) {
-        if sender.state == .ended || sender.state == .cancelled{
-            lastY = self.topContraint.constant
-            
-            if lastY == maxTop || lastY == minTop {
-                return
-            }
-            
-            if lastY < maxTop - 200{
-                //show all
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.topContraint.constant = self.minTop
-                    
-                    //                    self.effectView.effect = self.effection
-                    self.blurAddView.alpha = 1
-                    
-                    self.view.layoutIfNeeded()
-                    
-                }, completion: { (sucess) in
-                    print("show all done.")
-                    self.addText.becomeFirstResponder()
-                    self.lastY = self.topContraint.constant
-                })
-            }else {
-                //close up
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.topContraint.constant = self.maxTop
-                    
-                    //                    self.effectView.effect = nil
-                    self.blurAddView.alpha = 0
-                    
-                    self.view.layoutIfNeeded()
-                }, completion: { (sucess) in
-                    print("close up done.")
-                    self.lastY = self.topContraint.constant
-                })
-            }
-        }
-        if sender.state == .began || sender.state == .changed {
-            let y = sender.translation(in: self.addItemPanelView).y
-            
-            print("y in addItempanel=\(y)")
-            
-            if self.addText.isFirstResponder{
-                self.addText.resignFirstResponder()
-            }
-            
-            if y >= 0 && lastY == maxTop {
-                return
-            }else if y <= 0 && lastY == minTop {
-                return
-            }
-            
-            var dy = lastY + y
-            var alpha = 1 - (dy / maxTop)
-            print("alpha:\(alpha)")
-            
-            if dy <= minTop{
-                dy = minTop
-                alpha = 1
-            }else if dy > maxTop {
-                dy = maxTop
-                alpha = 0
-            }
-            
-            UIView.animate(withDuration: 0.2, animations: {
-                self.topContraint.constant = dy
-                //                self.effectView.effect = self.effection
-                self.blurAddView.alpha = alpha
-                
-                self.view.layoutIfNeeded()
-                
-            }, completion: { (sucess) in
-                print("swipe to up completed.")
-            })
-            
-        }
-    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         UIView.animate(withDuration: 0.5, delay: 0.3, options: .curveEaseOut, animations: {
+            
             self.topContraint.constant = self.view.frame.size.height - self.startOffset
             self.view.layoutIfNeeded()
         }, completion: nil)
+        print("view height=\(view.frame.size.height),topcontraint=\(topContraint.constant)")
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -328,7 +253,7 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
     
     @IBAction func removeReminder(_ sender: UIButton) {
         
-        if var currentItem = selectedTodoItem {
+        if let currentItem = selectedTodoItem {
             NotificationManager.cancel(currentItem.itemIdentifier.uuidString)
         }
         
@@ -403,6 +328,85 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
         selectedTodoItem = todoItem
         selectedIndexPath = indexPath
         
+    }
+    
+    @IBAction func swipeUp(_ sender: UIPanGestureRecognizer) {
+        if sender.state == .ended || sender.state == .cancelled{
+            lastY = self.topContraint.constant
+            
+            if lastY == maxTop || lastY == minTop {
+                return
+            }
+            
+            if lastY < maxTop - 200{
+                //show all
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.topContraint.constant = self.minTop
+                    
+                    //                    self.effectView.effect = self.effection
+                    self.blurAddView.alpha = 1
+                    
+                    self.view.layoutIfNeeded()
+                    
+                }, completion: { (sucess) in
+                    print("show all done.")
+                    self.addText.becomeFirstResponder()
+                    self.lastY = self.topContraint.constant
+                })
+            }else {
+                //close up
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.topContraint.constant = self.maxTop
+                    
+                    //                    self.effectView.effect = nil
+                    self.blurAddView.alpha = 0
+                    
+                    self.view.layoutIfNeeded()
+                }, completion: { (sucess) in
+                    print("close up done.")
+                    self.lastY = self.topContraint.constant
+                })
+            }
+        }
+        if sender.state == .began || sender.state == .changed {
+            let y = sender.translation(in: self.addItemPanelView).y
+            
+            print("y in addItempanel=\(y)")
+            
+            if self.addText.isFirstResponder{
+                self.addText.resignFirstResponder()
+            }
+            
+            if y >= 0 && lastY == maxTop {
+                return
+            }else if y <= 0 && lastY == minTop {
+                return
+            }
+            
+            var dy = lastY + y
+            var alpha = 1 - (dy / maxTop)
+            print("alpha:\(alpha)")
+            
+            if dy <= minTop{
+                dy = minTop
+                alpha = 1
+            }else if dy > maxTop {
+                dy = maxTop
+                alpha = 0
+            }
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                self.topContraint.constant = dy
+                //                self.effectView.effect = self.effection
+                self.blurAddView.alpha = alpha
+                
+                self.view.layoutIfNeeded()
+                
+            }, completion: { (sucess) in
+                print("swipe to up completed.")
+            })
+            
+        }
     }
     
 }
