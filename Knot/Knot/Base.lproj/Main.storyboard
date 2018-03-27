@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--What's next?-->
+        <!--Knot-->
         <scene sceneID="Pp2-xD-8ZH">
             <objects>
                 <tableViewController storyboardIdentifier="NodeTableView" id="G8s-tT-1pQ" customClass="ToDoTableViewController" customModule="Knot" customModuleProvider="target" sceneMemberID="viewController">
@@ -61,13 +61,7 @@
                             <outlet property="delegate" destination="G8s-tT-1pQ" id="J8O-V6-WlL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="What's next?" id="QQr-Td-p5b">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="VP5-0s-h81">
-                            <connections>
-                                <action selector="addItem:" destination="G8s-tT-1pQ" id="u3R-MA-YWV"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Knot" id="QQr-Td-p5b"/>
                     <connections>
                         <outlet property="progressBar" destination="6VB-aU-aAy" id="GRB-T4-YKd"/>
                         <outlet property="visualEffect" destination="moO-5I-vXC" id="hqb-IN-Zd4"/>
@@ -283,65 +277,6 @@
             </objects>
             <point key="canvasLocation" x="-49" y="-1283"/>
         </scene>
-        <!--Demo View Controller-->
-        <scene sceneID="vUG-rs-hew">
-            <objects>
-                <viewController id="8k4-us-d1i" customClass="DemoViewController" customModule="Knot" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="tdh-0U-ZRu">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gz6-Je-1QC">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="V9s-ju-P3B">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <blurEffect style="dark"/>
-                            </visualEffectView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qdi-59-yPI">
-                                <rect key="frame" x="20" y="136" width="374" height="600"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="600" id="73L-xb-7Q4"/>
-                                </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="MLM-Mr-Sf9" appends="YES" id="ZGz-hZ-iGN"/>
-                                    <outletCollection property="gestureRecognizers" destination="ZRo-o7-DJ3" appends="YES" id="lTo-QW-jER"/>
-                                </connections>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" name="mainBlueColor"/>
-                        <constraints>
-                            <constraint firstItem="qdi-59-yPI" firstAttribute="top" secondItem="jYO-VW-vdQ" secondAttribute="top" constant="116" id="8Ha-mu-ao1"/>
-                            <constraint firstItem="qdi-59-yPI" firstAttribute="leading" secondItem="jYO-VW-vdQ" secondAttribute="leading" constant="20" id="oY9-1B-UsG"/>
-                            <constraint firstItem="qdi-59-yPI" firstAttribute="centerX" secondItem="tdh-0U-ZRu" secondAttribute="centerX" id="r3S-ni-rdc"/>
-                            <constraint firstItem="jYO-VW-vdQ" firstAttribute="trailing" secondItem="qdi-59-yPI" secondAttribute="trailing" constant="20" id="vLv-TZ-0Ie"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="jYO-VW-vdQ"/>
-                    </view>
-                    <connections>
-                        <outlet property="addItemPanel" destination="qdi-59-yPI" id="8Ml-QW-b9K"/>
-                        <outlet property="effectView" destination="Gz6-Je-1QC" id="WnQ-iW-G8A"/>
-                        <outlet property="topContraint" destination="8Ha-mu-ao1" id="45Q-aS-Mrl"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Oom-Q8-t68" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="MLM-Mr-Sf9">
-                    <connections>
-                        <action selector="tapClose:" destination="8k4-us-d1i" id="a5v-2v-og6"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="ZRo-o7-DJ3">
-                    <connections>
-                        <action selector="swipeUp:" destination="8k4-us-d1i" id="Q6v-AY-tz2"/>
-                    </connections>
-                </panGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="-2881.1594202898555" y="72.554347826086968"/>
-        </scene>
         <!--Container View Controller-->
         <scene sceneID="Yly-Sd-cmG">
             <objects>
@@ -350,27 +285,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pk1-Mh-02I">
-                                <rect key="frame" x="354" y="680" width="40" height="40"/>
-                                <color key="backgroundColor" name="mainBlueColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="UhS-SP-HYh"/>
-                                    <constraint firstAttribute="width" constant="40" id="aBX-ub-1ln"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="36"/>
-                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="5"/>
-                                <state key="normal" title="+">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="addNewTodoItem:" destination="3ow-NZ-8Na" eventType="touchUpInside" id="EbC-B6-BKb"/>
-                                </connections>
-                            </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aAX-vS-1ow">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="665"/>
                                 <connections>
@@ -384,9 +298,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="416" height="635"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <gestureRecognizers/>
-                                    <connections>
-                                        <outletCollection property="gestureRecognizers" destination="qOL-GQ-mTQ" appends="YES" id="3TH-BD-hw0"/>
-                                    </connections>
                                 </view>
                                 <blurEffect style="prominent"/>
                             </visualEffectView>
@@ -449,7 +360,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OkT-op-Flb">
-                                <rect key="frame" x="20" y="20" width="374" height="700"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="700"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eLC-oK-v5e">
                                         <rect key="frame" x="8" y="162" width="358" height="234"/>
@@ -520,15 +431,13 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Su5-1m-SR1" firstAttribute="top" secondItem="aAX-vS-1ow" secondAttribute="top" constant="20" id="1Wi-3e-uI6"/>
-                            <constraint firstItem="OkT-op-Flb" firstAttribute="leading" secondItem="Su5-1m-SR1" secondAttribute="leading" constant="20" id="40D-4H-z4k"/>
+                            <constraint firstItem="OkT-op-Flb" firstAttribute="leading" secondItem="Su5-1m-SR1" secondAttribute="leading" id="40D-4H-z4k"/>
                             <constraint firstItem="aAX-vS-1ow" firstAttribute="leading" secondItem="Su5-1m-SR1" secondAttribute="leading" id="9Pu-3h-Ckd"/>
-                            <constraint firstItem="pk1-Mh-02I" firstAttribute="top" secondItem="aAX-vS-1ow" secondAttribute="bottom" constant="15" id="FqV-Kb-qir"/>
                             <constraint firstItem="l9D-1p-NOi" firstAttribute="bottom" secondItem="Su5-1m-SR1" secondAttribute="bottom" constant="-100" id="LaT-1Y-v2R"/>
                             <constraint firstItem="Su5-1m-SR1" firstAttribute="trailing" secondItem="aAX-vS-1ow" secondAttribute="trailing" id="LrG-vf-fLx"/>
                             <constraint firstItem="OkT-op-Flb" firstAttribute="centerX" secondItem="ozJ-dO-20I" secondAttribute="centerX" id="MFu-2G-79S"/>
                             <constraint firstItem="l9D-1p-NOi" firstAttribute="leading" secondItem="aAX-vS-1ow" secondAttribute="leading" id="eCK-KC-DVt"/>
-                            <constraint firstItem="Su5-1m-SR1" firstAttribute="trailing" secondItem="pk1-Mh-02I" secondAttribute="trailing" constant="20" id="h2E-rf-2JI"/>
-                            <constraint firstItem="Su5-1m-SR1" firstAttribute="trailing" secondItem="OkT-op-Flb" secondAttribute="trailing" constant="20" id="heh-3M-ZgR"/>
+                            <constraint firstItem="Su5-1m-SR1" firstAttribute="trailing" secondItem="OkT-op-Flb" secondAttribute="trailing" id="heh-3M-ZgR"/>
                             <constraint firstItem="Su5-1m-SR1" firstAttribute="bottom" secondItem="aAX-vS-1ow" secondAttribute="bottom" constant="71" id="mih-Ve-1Zi"/>
                             <constraint firstItem="OkT-op-Flb" firstAttribute="top" secondItem="Su5-1m-SR1" secondAttribute="top" id="q5t-ua-MFH"/>
                             <constraint firstItem="l9D-1p-NOi" firstAttribute="top" secondItem="Su5-1m-SR1" secondAttribute="top" constant="100" id="rJh-pe-4hL"/>
@@ -539,8 +448,6 @@
                         </connections>
                     </view>
                     <connections>
-                        <outlet property="addButton" destination="pk1-Mh-02I" id="pbo-J2-YXY"/>
-                        <outlet property="addButtonTrail" destination="h2E-rf-2JI" id="UJk-BR-mrv"/>
                         <outlet property="addItemPanelView" destination="OkT-op-Flb" id="GlI-mg-6sf"/>
                         <outlet property="addItemView" destination="1eI-Hf-cU7" id="ylx-0l-OP5"/>
                         <outlet property="addText" destination="0Ki-jI-50R" id="XGL-IH-NrF"/>
@@ -569,11 +476,6 @@
                         <action selector="swipeUp:" destination="3ow-NZ-8Na" id="cxr-dj-e8h"/>
                     </connections>
                 </panGestureRecognizer>
-                <tapGestureRecognizer id="qOL-GQ-mTQ">
-                    <connections>
-                        <action selector="dismissAddItemView:" destination="3ow-NZ-8Na" id="QRm-HO-2jb"/>
-                    </connections>
-                </tapGestureRecognizer>
                 <tapGestureRecognizer id="EzX-Ja-mjW">
                     <connections>
                         <action selector="dismissAddItemView:" destination="3ow-NZ-8Na" id="0mn-5j-w2G"/>
@@ -587,11 +489,14 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qK6-Nr-IPP" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="3RC-g0-D6k">
-                        <rect key="frame" x="0.0" y="20" width="414" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3RC-g0-D6k">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="A9s-62-RBD">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="G8s-tT-1pQ" kind="relationship" relationship="rootViewController" id="LUA-9C-MVw"/>
                     </connections>

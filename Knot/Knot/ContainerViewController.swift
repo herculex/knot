@@ -19,12 +19,10 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
     @IBOutlet weak var sideView: UIView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var connectionButton: UIButton!
-    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var addText: UITextField!
     
     @IBOutlet weak var addItemView: UIView!
     @IBOutlet weak var reminder: UIDatePicker!
-    @IBOutlet weak var addButtonTrail: NSLayoutConstraint!
     var todoTableViewController:ToDoTableViewController!
     var effectBlurOfBlurAddView:UIVisualEffect!
 
@@ -118,28 +116,24 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
         super.viewDidAppear(animated)
         
         UIView.animate(withDuration: 0.5, delay: 0.3, options: .curveEaseOut, animations: {
-            self.addButtonTrail.constant += self.view.bounds.width
+            self.topContraint.constant = self.view.frame.size.height - self.startOffset
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.view.addSubview(blurAddView)
+        
         blurAddView.frame = view.frame
         blurAddView.alpha = 0
         
-        topContraint.constant = view.frame.size.height - startOffset
+        topContraint.constant = view.frame.size.height
         
         lastY = topContraint.constant
         minTop = CGFloat(integerLiteral: 50)
         maxTop = view.frame.size.height - startOffset
         
-//        reminderConstraint.constant -= view.bounds.height
-//        reminderView.alpha = 0
         
         effectBlurOfBlurAddView = blurAddView.effect
-//        blurAddView.effect = nil
-//        blurAddView.alpha = 0
         
         addText.returnKeyType = .done
         addText.delegate = self
@@ -148,8 +142,6 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
         addItemView.layer.shadowOffset = CGSize(width: 3, height: 0)
         addItemView.layer.shadowColor = UIColor.black.cgColor
         addItemView.layer.shadowOpacity = 0.8
-        
-        addButtonTrail.constant -= view.bounds.width
         
         blurSideView.layer.cornerRadius = 15
         sideView.layer.shadowOffset = CGSize(width: 3, height: 0)
@@ -163,6 +155,8 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
         reminderView.layer.shadowOffset = CGSize(width: 3, height: 0)
         reminderView.layer.shadowColor = UIColor.black.cgColor
         reminderView.layer.shadowOpacity = 0.8
+        
+        reminderView.alpha = 0
 
     }
     
@@ -175,9 +169,6 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
     }
 
     @IBOutlet var reminderView: UIView!
-    @IBAction func addNewTodoItem(_ sender: UIButton) {
-//        addViewAnimateIn()
-    }
 
     func saveTodoItem() {
         let formatter = DateFormatter()
@@ -195,6 +186,9 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
                 if let date = formatter.date(from: reminderButton.currentTitle!){
                     currentItem.hasReminder = true
                     currentItem.remindAt = date
+                }else{
+                    currentItem.hasReminder = false
+                    currentItem.remindAt = Date(timeIntervalSince1970: 0)
                 }
                 
                 todoTableViewController.editTodo(currentItem, currentIndex)
@@ -333,6 +327,10 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
     }
     
     @IBAction func removeReminder(_ sender: UIButton) {
+        
+        if var currentItem = selectedTodoItem {
+            NotificationManager.cancel(currentItem.itemIdentifier.uuidString)
+        }
         
         reminderButton.setTitle("闹钟", for: .normal)
         animateReminderOut()
