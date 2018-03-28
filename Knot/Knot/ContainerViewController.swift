@@ -32,7 +32,7 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
     var lastY:CGFloat!
     var minTop:CGFloat!
     var maxTop:CGFloat!
-    let startOffset = CGFloat(integerLiteral: 60)
+    let startOffset = CGFloat(integerLiteral: 80)
     
 
     override func viewDidAppear(_ animated: Bool) {
