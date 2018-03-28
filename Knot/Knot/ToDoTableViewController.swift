@@ -16,6 +16,7 @@ protocol ToDoTableViewControllerDelegate {
 }
 class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowserViewControllerDelegate {
 
+    @IBOutlet weak var textView: UITextView!
     var delegate:ToDoTableViewControllerDelegate!
     var peerID:MCPeerID!
     var mcSession:MCSession!
@@ -61,7 +62,7 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        textView.autoresizingMask = UIViewAutoresizing.flexibleHeight
         setupConnectivity()
         loadData()
         
@@ -73,6 +74,8 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
