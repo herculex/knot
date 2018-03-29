@@ -16,7 +16,6 @@ protocol ToDoTableViewControllerDelegate {
 }
 class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowserViewControllerDelegate {
 
-    @IBOutlet weak var textView: UITextView!
     var delegate:ToDoTableViewControllerDelegate!
     var peerID:MCPeerID!
     var mcSession:MCSession!
@@ -62,7 +61,7 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textView.autoresizingMask = UIViewAutoresizing.flexibleHeight
+        
         setupConnectivity()
         loadData()
         
