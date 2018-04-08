@@ -32,7 +32,7 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
     var lastY:CGFloat!
     var minTop:CGFloat!
     var maxTop:CGFloat!
-    let startOffset = CGFloat(integerLiteral: 80)
+    let startOffset = CGFloat(integerLiteral: 75)
     
 
     override func viewDidAppear(_ animated: Bool) {
@@ -47,6 +47,9 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        reminder.setValue(UIColor.white, forKeyPath: "textColor")
+        reminder.setValue(false, forKey: "highlightsToday")
         
         blurAddView.frame = view.frame
         blurAddView.alpha = 0
@@ -65,7 +68,7 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
         
         sideViewConstraint.constant -= sideView.bounds.size.width
         sideViewIsShowing = false
-              
+        
         reminderView.alpha = 0
 
     }

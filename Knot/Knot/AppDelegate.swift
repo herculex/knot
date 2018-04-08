@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
        
+        
+        UIApplication.shared.statusBarStyle = .lightContent
+        
         UNUserNotificationCenter.current().requestAuthorization(options: [.sound,.alert,.badge]) { (authorized, error) in
             if !authorized {
                 print("knot's notification can be useless , because you did not allow notifications")
