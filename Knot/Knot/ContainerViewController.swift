@@ -326,7 +326,7 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
                 return
             }
             
-            if lastY < maxTop - 200{
+            if lastY < maxTop - 100{
                 //show all
                 UIView.animate(withDuration: 0.2, animations: {
                     self.topContraint.constant = self.minTop
