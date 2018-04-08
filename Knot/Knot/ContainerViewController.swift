@@ -63,24 +63,9 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
         addText.returnKeyType = .done
         addText.delegate = self
         
-        addItemView.layer.cornerRadius = 10
-        addItemView.layer.shadowOffset = CGSize(width: 3, height: 0)
-        addItemView.layer.shadowColor = UIColor.black.cgColor
-        addItemView.layer.shadowOpacity = 0.8
-        
-        blurSideView.layer.cornerRadius = 15
-        sideView.layer.shadowOffset = CGSize(width: 3, height: 0)
-        sideView.layer.shadowColor = UIColor.black.cgColor
-        sideView.layer.shadowOpacity = 0.8
-        
         sideViewConstraint.constant -= sideView.bounds.size.width
         sideViewIsShowing = false
-      
-        reminderView.layer.cornerRadius = 15
-        reminderView.layer.shadowOffset = CGSize(width: 3, height: 0)
-        reminderView.layer.shadowColor = UIColor.black.cgColor
-        reminderView.layer.shadowOpacity = 0.8
-        
+              
         reminderView.alpha = 0
 
     }
