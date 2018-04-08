@@ -56,9 +56,9 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
         
         topContraint.constant = view.frame.size.height
         
-        lastY = topContraint.constant
         minTop = CGFloat(integerLiteral: 50)
         maxTop = view.frame.size.height - startOffset
+        lastY = maxTop
         
         
         effectBlurOfBlurAddView = blurAddView.effect
@@ -221,9 +221,15 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
         })
     }
     
-    @IBAction func dismissAddItemView(_ sender: Any) {
-        saveTodoItem()
-        addViewAnimateOut()
+    @IBAction func dismissAddItemView(_ sender: UITapGestureRecognizer) {
+        
+        if lastY == minTop {
+            saveTodoItem()
+            addViewAnimateOut()
+        }
+        else if lastY == maxTop {
+            addViewAnimateIn()
+        }
     }
     
     
@@ -262,7 +268,7 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
         
 //        addItemView.transform = addText.transform.scaledBy(x: 1.2, y: 1.2)
 
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             //            self.addItemView.alpha = 1
             //            self.addItemView.transform = CGAffineTransform.identity
             //            self.blurAddView.effect = self.effectBlurOfBlurAddView
@@ -271,6 +277,7 @@ class ContainerViewController: UIViewController,UITextFieldDelegate,ToDoTableVie
             self.view.layoutIfNeeded()
         }) { (sucess) in
             self.addText.becomeFirstResponder()
+            self.lastY = self.topContraint.constant
         }
         
     }
