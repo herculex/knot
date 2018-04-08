@@ -414,7 +414,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1eI-Hf-cU7">
                                         <rect key="frame" x="0.0" y="54" width="414" height="91"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="todo Item Title" textAlignment="natural" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="0Ki-jI-50R">
+                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="准备好了吗" textAlignment="natural" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="0Ki-jI-50R">
                                                 <rect key="frame" x="5" y="20" width="401" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -511,7 +511,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KW7-jy-86m" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="Erh-vh-R07">
+                <screenEdgePanGestureRecognizer enabled="NO" minimumNumberOfTouches="1" id="Erh-vh-R07">
                     <rectEdge key="edges" left="YES"/>
                     <connections>
                         <action selector="swipeSideView:" destination="3ow-NZ-8Na" id="TFa-aR-6HJ"/>

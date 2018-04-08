@@ -258,25 +258,25 @@ class ToDoTableViewController: UITableViewController,MCSessionDelegate,MCBrowser
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        let completeAction = UITableViewRowAction(style: .normal, title: "Complete") { (action, indexPath) in
+        let completeAction = UITableViewRowAction(style: .normal, title: "完成") { (action, indexPath) in
             self.completeTodoItem(indexPath)
         }
-        completeAction.backgroundColor = UIColor.green
-        let shareAction = UITableViewRowAction(style: .normal, title: "Share") { (action
+        completeAction.backgroundColor = UIColor.lightGray
+        let shareAction = UITableViewRowAction(style: .normal, title: "分享") { (action
             , indexPath) in
             let todoItem = self.todoItems[indexPath.row]
             self.sendTodo(todoItem)
         }
-        shareAction.backgroundColor = UIColor(named: "mainYellowColor")
-        let deleteAction = UITableViewRowAction(style: .normal, title: "Delete") { (action
+        shareAction.backgroundColor = UIColor.darkGray
+        let deleteAction = UITableViewRowAction(style: .normal, title: "删除") { (action
             , indexPath) in
             self.todoItems[indexPath.row].deleteItem()
             self.todoItems.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
-        deleteAction.backgroundColor = UIColor(named: "mainBlueColor")
+        deleteAction.backgroundColor = UIColor.darkGray
         
-        return [completeAction,deleteAction,shareAction]
+        return [completeAction,deleteAction]
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath){
